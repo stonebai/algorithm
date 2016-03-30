@@ -47,22 +47,31 @@ public class Solution {
     //     }
     //     return bad;
     // }
+    /**
+     * KMP algorithm
+     **/
     public int strStr(String a, String b) {
         if(b.length()==0) return 0;
         char[] text = a.toCharArray();
         char[] pattern = b.toCharArray();
         int[] next = getNext(pattern);
         int i=0, j=0;
-        while(i<=text.length-pattern.length && j<pattern.length) {
-            if(text[i+j]==pattern[j]) {
+        while(i<text.length && j<pattern.length) {
+            if(text[i]==pattern[j]) {
+                i++;
                 j++;
             }
             else {
-                i += j - next[j];
-                j = Math.max(0, next[j]);
+                if(next[j]==-1) {
+                    i++;
+                    j = 0;
+                }
+                else {
+                    j = next[j];
+                }
             }
         }
-        if(j==pattern.length) return i;
+        if(j==pattern.length) return i-j;
         return -1;
     }
     
