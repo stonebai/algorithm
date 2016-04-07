@@ -25,19 +25,20 @@ public class NumArray {
         return root;
     }
     
-    private void updateSeg(SegNode root, int[] nums, int i, int val) {
-        if(i>=root.left && i<=root.right) {
-            root.value += val - nums[i];
-            if(root.lc!=null) {
-                updateSeg(root.lc, nums, i, val);
-            }
-            if(root.rc!=null) {
-                updateSeg(root.rc, nums, i, val);
-            }
+    private void updateSeg(SegNode root, int i, int val) {
+        if(root.left==root.right && root.left==i) {
+            root.value = val;
+        }
+        else {
+            int mid = root.left + (root.right - root.left) / 2;
+            if(i<=mid) updateSeg(root.lc, i ,val);
+            else updateSeg(root.rc, i, val);
+            root.value = root.lc.value + root.rc.value;
         }
     }
     
     private int resSeg(SegNode root, int i, int j) {
+        if(root==null || j<root.left || i>root.right) return 0;
         if(i<=root.left && j>=root.right) {
             return root.value;
         }
@@ -55,24 +56,18 @@ public class NumArray {
     }
     
     private SegNode root;
-    private int[] nums;
 
     public NumArray(int[] nums) {
         if(nums==null || nums.length==0) return;
-        this.nums = nums;
         root = buildSeg(nums, 0, nums.length-1);
     }
 
     void update(int i, int val) {
-        if(root!=null && nums!=null) {
-            updateSeg(root, nums, i, val);
-            nums[i] = val;   
-        }
+        updateSeg(root, i, val);
     }
 
     public int sumRange(int i, int j) {
-        if(root!=null) return resSeg(root, i, j);
-        else return 0;
+        return resSeg(root, i, j);
     }
 }
 
