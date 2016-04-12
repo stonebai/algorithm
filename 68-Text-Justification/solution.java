@@ -43,27 +43,6 @@ public class Solution {
             sb.append(' ' + words[start++]);
         }
         addSpaces(sb, maxWidth - len);
-        // int num = words.length - start;
-        // if(num==1) {
-        //     sb.append(words[start]);
-        //     addSpaces(sb, maxWidth - len);
-        // }
-        // else {
-        //     int spaces = num - 1 + maxWidth - len;
-        //     int average = spaces / (num - 1);
-        //     int external = spaces % (num - 1);
-        //     sb.append(words[start++]);
-        //     while(start<words.length) {
-        //         if(external>0) {
-        //             external--;
-        //             addSpaces(sb, average + 1);
-        //         }
-        //         else {
-        //             addSpaces(sb, average);
-        //         }
-        //         sb.append(words[start++]);
-        //     }
-        // }
         res.add(sb.toString());
         return res;
     }
