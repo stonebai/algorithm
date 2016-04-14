@@ -1,7 +1,7 @@
 public class Solution {
     public int lengthOfLIS(int[] nums) {
         if(nums==null || nums.length==0) return 0;
-        List<Integer> list = new LinkedList<Integer>();
+        List<Integer> list = new ArrayList<Integer>(nums.length);
         list.add(nums[0]);
         for(int i=1;i<nums.length;i++) {
             int num = list.get(list.size()-1);
