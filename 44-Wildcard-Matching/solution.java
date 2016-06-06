@@ -3,16 +3,24 @@ public class Solution {
         if (s == null || p == null) return false;
         int i = 0, j = 0;
         int tmpI = -1, tmpJ = -1;
-        while(i < s.length()) {
-            char a = s.charAt(i), b = p.charAt(j);
-            if (b == '*') {
+        char[] ss = s.toCharArray();
+        char[] ps = p.toCharArray();
+        while(i < ss.length) {
+            if (j == ps.length) {
+                if (tmpJ == -1) {
+                    return false;
+                } else {
+                    i = ++tmpI;
+                    j = tmpJ;
+                }
+            } else if (ps[j] == '*') {
                 j++;
-                while(j < p.length() && p.charAt(j) == '*') {
+                while(j < ps.length && ps[j] == '*') {
                     j++;
                 }
                 tmpI = i;
                 tmpJ = j;
-            } else if (b == '?' && b == a) {
+            } else if (ps[j] == '?' || ps[j] == ss[i]) {
                 i++;
                 j++;
             } else if (tmpJ != -1) {
@@ -22,8 +30,8 @@ public class Solution {
                 return false;
             }
         }
-        while(j < p.length()) {
-            if (p.charAt(j) == '*') {
+        while(j < ps.length) {
+            if (ps[j] == '*') {
                 j++;
             } else {
                 return false;
