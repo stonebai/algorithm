@@ -21,7 +21,7 @@ public class Solution {
                     }
                 }
             }
+            return dp[word1.length()][word2.length()];
         }
-        return dp[word1.length()][word2.length()];
     }
 }
