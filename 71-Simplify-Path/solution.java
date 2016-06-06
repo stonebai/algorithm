@@ -6,7 +6,7 @@ public class Solution {
         for (String str : split) {
             if (str.length() == 0 || str.equals(".")) {
                 continue;
-            } else if (str.equals("..") {
+            } else if (str.equals("..")) {
                 deque.pop();
             } else {
                 deque.push(str);
