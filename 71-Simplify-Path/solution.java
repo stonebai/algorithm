@@ -7,16 +7,20 @@ public class Solution {
             if (str.length() == 0 || str.equals(".")) {
                 continue;
             } else if (str.equals("..")) {
-                deque.pop();
+                deque.pollFirst();
             } else {
-                deque.push(str);
+                deque.offerFirst(str);
             }
         }
         
-        StringBuilder sb = new StringBuilder();
-        while(!deque.isEmpty()) {
-            sb.append("/" + deque.poll());
+        if (deque.isEmpty()) {
+            return "/";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            while(!deque.isEmpty()) {
+                sb.append("/" + deque.pollLast());
+            }
+            return sb.toString();
         }
-        return sb.toString();
     }
 }
