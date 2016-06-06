@@ -11,8 +11,8 @@ public class Solution {
             }
         }
         if (s.length() == 0) {
-            if (s.length() > 1 && s.charAt(1) == '*') {
-                return isMatch(s, p.substring(2));
+            if (p.length() > 0 && p.charAt(0) == '*') {
+                return isMatch(s, p.substring(1));
             } else {
                 return false;
             }
@@ -20,14 +20,9 @@ public class Solution {
         int i = 0, j = 0;
         while (i < s.length() && j < p.length()) {
             char a = s.charAt(i), b = p.charAt(j);
-            if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
-                if (b == '.' && a == b) {
-                    return isMatch(s, p.substring(j + 2)) ||
-                    isMatch(s.substring(i + 1), p.substring(j + 2) ||
-                    isMatch(s.substring(i + 1), p.substring(j));
-                } else {
-                    j += 2;
-                }
+            if (b == '*') {
+                return isMatch(s.substring(i + 1), p.substring(j)) || 
+                isMatch(s.substring(i), p.substring(j + 1));
             } else if (b == '.' || a == b) {
                 i++;
                 j++;
