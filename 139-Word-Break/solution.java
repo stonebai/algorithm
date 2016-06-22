@@ -12,11 +12,13 @@ public class Solution {
         
         for (int i = 1;i < s.length();i++) {
             String str = s.substring(0, i);
-            if (wordDict.contains(str) && wordBreak(s.substring(i)) {
+            if (wordDict.contains(str) && wordBreak(s.substring(i))) {
+                visited.put(s, true);
                 return true;
             }
         }
         
+        visited.put(s, false);
         return false;
     }
 }
