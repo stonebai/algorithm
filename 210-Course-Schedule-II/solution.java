@@ -15,7 +15,7 @@ public class Solution {
         List<Integer> res = new ArrayList<Integer>();
         while (!dg.isEmpty()) {
             Integer tmp = dg.keySet().iterator().next();
-            if (!dfs(dg, set, tmp, res)) {
+            if (!dfs(dg, set, tmp, res, new HashSet<Integer>())) {
                 return new ArrayList<Integer>();
             }
         }
@@ -25,17 +25,20 @@ public class Solution {
         return res;
     }
     
-    private boolean dfs(Map<Integer, List<Integer>> dg, Set<Integer> set, Integer n, List<Integer> res) {
-        if (!set.remove(n)) return false;
-        if (dg.containsKey(n)) {
-            for (Integer tmp : dg.get(n)) {
-                if(!dfs(dg, set, tmp, res)) {
-                    return false;
+    private boolean dfs(Map<Integer, List<Integer>> dg, Set<Integer> set, Integer n, List<Integer> res, Set<Integer> path) {
+        if (!path.add(n)) return false;
+        if (set.remove(n)) {
+            if (dg.containsKey(n)) {
+                for (Integer tmp : dg.get(n)) {
+                    if(!dfs(dg, set, tmp, res, path)) {
+                        return false;
+                    }
                 }
+                dg.remove(n);
             }
+            res.add(n);
         }
-        dg.remove(n);
-        res.add(n);
+        path.remove(n);
         return true;
     }
     
@@ -43,7 +46,9 @@ public class Solution {
         Map<Integer, List<Integer>> dg = new HashMap<Integer, List<Integer>>();
         for (int[] pre : pres) {
             if (!dg.containsKey(pre[0])) {
-                dg.put(pre[0], Collections.singletonList(pre[1]));
+                List<Integer> tmp = new ArrayList<Integer>();
+                tmp.add(pre[1]);
+                dg.put(pre[0], tmp);
             } else {
                 dg.get(pre[0]).add(pre[1]);
             }
