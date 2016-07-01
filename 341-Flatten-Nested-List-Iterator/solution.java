@@ -17,7 +17,7 @@
  */
 public class NestedIterator implements Iterator<Integer> {
     
-    private Stack<Iterator<NestedList>> stack = new Stack<>();
+    private Stack<Iterator<NestedInteger>> stack = new Stack<>();
     private Iterator<NestedInteger> iterator;
     
     public NestedIterator(List<NestedInteger> nestedList) {
@@ -27,12 +27,14 @@ public class NestedIterator implements Iterator<Integer> {
     @Override
     public Integer next() {
         if (hasNext()) {
-            NestedInteger tmp = iterator.next();
-            if (tmp.isInteger()) {
-                return tmp.getInteger();
-            } else {
-                stack.push(iterator);
-                iterator = tmp.getList().iterator();
+            while (true) {
+                NestedInteger tmp = iterator.next();
+                if (tmp.isInteger()) {
+                    return tmp.getInteger();
+                } else {
+                    stack.push(iterator);
+                    iterator = tmp.getList().iterator();
+                }   
             }
         } else {
             return null;
