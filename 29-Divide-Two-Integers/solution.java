@@ -4,27 +4,34 @@ public class Solution {
             return Integer.MAX_VALUE;
         }
         boolean sign = true;
-        if (dividend < 0) {
-            dividend = -dividend;
+        long dd = dividend;
+        if (dd < 0) {
+            dd = -dd;
             sign = !sign;
         }
-        if (divisor < 0) {
-            divisor = -divisor;
+        long ds = divisor;
+        if (ds < 0) {
+            ds = -ds;
             sign = !sign;
         }
-        if (dividend < divisor) {
-            return 0;
-        }
-        long result = 1;
-        int backup = divisor;
-        while (dividend > (long)divisor + divisor) {
-            divisor += divisor;
-            result += result;
-        }
-        result += divide(dividend - divisor, backup);
+        long result = divide(dd, ds);
         if (!sign) {
             result = -result;
         }
-        return Math.min(result, Integer.MAX_VALUE);
+        return (int) Math.min(result, Integer.MAX_VALUE);
+    }
+    
+    private long divide(long dd, long ds) {
+        if (dd < ds) {
+            return 0;
+        }
+        long res = 1;
+        long backup = ds;
+        while (dd > ds + ds) {
+            ds += ds;
+            res += res;
+        }
+        res += divide(dd - ds, backup);
+        return res;
     }
 }
