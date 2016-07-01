@@ -21,7 +21,7 @@ public class Solution {
         int pivotIndex = lo;
         swap(nums, lo, mid);
         while(true) {
-            while(lo <= hi && nums[hi] >= pivot) hi--;
+            while(pivotIndex < hi && nums[hi] >= pivot) hi--;
             while(lo <= hi && nums[lo] <= pivot) lo++;
             if (lo >= hi) break;
             swap(nums, lo++, hi--);
