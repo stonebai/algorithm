@@ -29,7 +29,7 @@ public class Solution {
     private int dfs(int[][] matrix, int i, int j, int pre, int[][] dp) {
         if (i < 0 || i >= matrix.length
         || j < 0 || j >= matrix[i].length
-        || visited[i][j] || matrix[i][j] <= pre) {
+        || matrix[i][j] <= pre) {
             return 0;
         }
         return dfs(matrix, i, j, dp);
