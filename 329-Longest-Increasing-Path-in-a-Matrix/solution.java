@@ -9,31 +9,29 @@ public class Solution {
         int max = 0;
         for (int i = 0;i < row;i++) {
             for (int j = 0;j < col;j++) {
-                int tmp = dfs(matrix, i, j, new boolean[row][col], dp);
+                int tmp = dfs(matrix, i, j, dp);
                 max = Math.max(tmp, max);
             }
         }
         return max;
     }
     
-    private int dfs(int[][] matrix, int i, int j, boolean[][] visited, int[][] dp) {
+    private int dfs(int[][] matrix, int i, int j, int[][] dp) {
         if (dp[i][j] != 0) return dp[i][j];
-        visited[i][j] = true;
-        int a = dfs(matrix, i + 1, j, visited, matrix[i][j], dp);
-        int b = dfs(matrix, i - 1, j, visited, matrix[i][j], dp);
-        int c = dfs(matrix, i, j + 1, visited, matrix[i][j], dp);
-        int d = dfs(matrix, i, j - 1, visited, matrix[i][j], dp);
-        visited[i][j] = false;
+        int a = dfs(matrix, i + 1, j, matrix[i][j], dp);
+        int b = dfs(matrix, i - 1, j, matrix[i][j], dp);
+        int c = dfs(matrix, i, j + 1, matrix[i][j], dp);
+        int d = dfs(matrix, i, j - 1, matrix[i][j], dp);
         dp[i][j] = 1 + Math.max(Math.max(a, b), Math.max(c, d));
         return dp[i][j];
     }
     
-    private int dfs(int[][] matrix, int i, int j, boolean[][] visited, int pre, int[][] dp) {
+    private int dfs(int[][] matrix, int i, int j, int pre, int[][] dp) {
         if (i < 0 || i >= matrix.length
         || j < 0 || j >= matrix[i].length
         || visited[i][j] || matrix[i][j] <= pre) {
             return 0;
         }
-        return dfs(matrix, i, j, visited, dp);
+        return dfs(matrix, i, j, dp);
     }
 }
