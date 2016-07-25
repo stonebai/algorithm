@@ -1,7 +1,7 @@
 public class Solution {
     public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         List<int[]> res = new ArrayList<int[]>();
-        if (k <= 0) {
+        if (k <= 0 || (nums1.length * nums2.length < k)) {
             return res;
         }
         int i = 0, j = 0;
