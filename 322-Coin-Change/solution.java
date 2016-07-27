@@ -19,10 +19,13 @@ public class Solution {
         int min = Integer.MAX_VALUE;
         boolean found = false;
         for (int coin : coins) {
-            int tmp = helper(coins, amount - coin, dp);
+            int remain = amount - coin;
+            int tmp = helper(coins, remain, dp);
             if (tmp != -1) {
                 found = true;
                 min = Math.min(min, tmp);
+            } else {
+                dp.put(remain, -1);
             }
         }
         if (found) {
