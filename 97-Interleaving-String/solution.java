@@ -3,6 +3,12 @@ public class Solution {
         if (s1 == null || s2 == null || s3 == null || s1.length() + s2.length() != s3.length()) {
             return false;
         }
+        if (s1.length() == 0) {
+            return s2.equals(s3);
+        }
+        if (s2.length() == 0) {
+            return s1.equals(s3);
+        }
         char[] chs1 = s1.toCharArray();
         char[] chs2 = s2.toCharArray();
         char[] chs3 = s3.toCharArray();
