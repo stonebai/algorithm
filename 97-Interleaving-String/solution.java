@@ -6,27 +6,42 @@ public class Solution {
         char[] chs1 = s1.toCharArray();
         char[] chs2 = s2.toCharArray();
         char[] chs3 = s3.toCharArray();
-        int i = 0, j = 0, k = 0;
+        return helper(chs1, chs2, chs3, 0, 0, 0, new short[chs1.length][chs2.length][chs3.length]);
+    }
+    
+    private boolean helper(char[] chs1, char[] chs2, char[] chs3, int i, int j, int k, short[][][] dp) {
+        if (dp[i][j][k] != 0) {
+            if (dp[i][j][k] == 1) return true;
+            else return false;
+        }
+        int ii = i, jj = j, kk = k;
         while (k < chs3.length && i < chs1.length && j < chs2.length) {
             if (chs3[k] == chs1[i] && chs3[k] == chs2[j]) {
-                boolean b1 = isInterleave(s1.substring(i + 1), s2.substring(j), s3.substring(k + 1));
-                boolean b2 = isInterleave(s1.substring(i), s2.substring(j + 1), s3.substring(k + 1));
-                return b1 || b2;
+                if (helper(chs1, chs2, chs3, i + 1, j, k + 1, dp)) return true;
+                else return helper(chs1, chs2, chs3, i, j + 1, k + 1, dp);
             } else if (chs3[k] == chs1[i]) {
                 i++;
             } else if (chs3[k] == chs2[j]) {
                 j++;
             } else {
+                dp[ii][jj][kk] = -1;
                 return false;
             }
             k++;
         }
         while (k < chs3.length && i < chs1.length) {
-            if (chs3[k++] != chs1[i++]) return false;
+            if (chs3[k++] != chs1[i++]) {
+                dp[ii][jj][kk] = -1;
+                return false;
+            }
         }
         while (k < chs3.length && j < chs2.length) {
-            if (chs3[k++] != chs2[j++]) return false;
+            if (chs3[k++] != chs2[j++]) {
+                dp[ii][jj][kk] = -1;
+                return false;
+            }
         }
+        dp[ii][jj][kk] = 1;
         return true;
     }
 }
