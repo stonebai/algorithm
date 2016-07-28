@@ -12,11 +12,10 @@ public class Solution {
         char[] chs1 = s1.toCharArray();
         char[] chs2 = s2.toCharArray();
         char[] chs3 = s3.toCharArray();
-        return helper(chs1, chs2, chs3, 0, 0, 0, new short[chs1.length][chs2.length][chs3.length]);
+        return helper(chs1, chs2, chs3, 0, 0, 0, new short[chs1.length + 1][chs2.length + 1][chs3.length + 1]);
     }
     
     private boolean helper(char[] chs1, char[] chs2, char[] chs3, int i, int j, int k, short[][][] dp) {
-        if (k == chs3.length) return true;
         if (dp[i][j][k] != 0) {
             if (dp[i][j][k] == 1) return true;
             else return false;
@@ -24,7 +23,7 @@ public class Solution {
         int ii = i, jj = j, kk = k;
         while (k < chs3.length && i < chs1.length && j < chs2.length) {
             if (chs3[k] == chs1[i] && chs3[k] == chs2[j]) {
-                if (helper(chs1, chs2, chs3, i + 1, j, k + 1, dp)) return true;
+                if (ihelper(chs1, chs2, chs3, i + 1, j, k + 1, dp)) return true;
                 else return helper(chs1, chs2, chs3, i, j + 1, k + 1, dp);
             } else if (chs3[k] == chs1[i]) {
                 i++;
