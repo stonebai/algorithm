@@ -7,7 +7,7 @@ public class Solution extends GuessGame {
     public int guessNumber(int n) {
         int hi = n, lo = 1;
         while (true) {
-            int guess = (lo + hi) / 2;
+            int guess = (int) (((long)lo + (long)hi) / 2);
             int res = guess(guess);
             switch (res) {
                 case 1:
