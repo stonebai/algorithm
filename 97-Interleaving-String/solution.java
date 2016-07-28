@@ -23,7 +23,7 @@ public class Solution {
         int ii = i, jj = j, kk = k;
         while (k < chs3.length && i < chs1.length && j < chs2.length) {
             if (chs3[k] == chs1[i] && chs3[k] == chs2[j]) {
-                if (ihelper(chs1, chs2, chs3, i + 1, j, k + 1, dp)) return true;
+                if (helper(chs1, chs2, chs3, i + 1, j, k + 1, dp)) return true;
                 else return helper(chs1, chs2, chs3, i, j + 1, k + 1, dp);
             } else if (chs3[k] == chs1[i]) {
                 i++;
