@@ -1,5 +1,6 @@
 public class Solution {
     public int maxEnvelopes(int[][] envelopes) {
+        if (envelopes == null || envelopes.length == 0) return 0;
         Arrays.sort(envelopes, new Comparator<int[]>() {
             public int compare(int[] a, int[] b) {
                 if (a[0] > b[0] && a[1] > b[1]) {
