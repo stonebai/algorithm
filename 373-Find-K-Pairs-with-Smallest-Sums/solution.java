@@ -24,7 +24,7 @@ public class Solution {
         for (int i = 0;i < nums1.length;i++) {
             q.offer(new Node(i, 0, nums1[i], nums2[0]));
         }
-        for (int i = 0;i < k;i++) {
+        for (int i = 0;i < k && !q.isEmpty();i++) {
             Node node = q.poll();
             int[] tmp = new int[2];
             tmp[0] = nums1[node.i1];
