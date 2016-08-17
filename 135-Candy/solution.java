@@ -30,7 +30,8 @@ public class Solution {
                 if (a == b) return res;
                 else return res + 1;
             } else {
-                i = b;
+                if (a == b) i = b + 1;
+                else i = b;
             }
         }
         return res;
