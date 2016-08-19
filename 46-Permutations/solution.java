@@ -1,27 +1,23 @@
 public class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        return permute(nums, 0);
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        helper(nums, new ArrayList<Integer>(), new HashSet<Integer>(), res);
+        return res;
     }
     
-    private List<List<Integer>> permute(int[] nums, int start) {
-        List<List<Integer>> res = new LinkedList<List<Integer>>();
-        if(start==nums.length-1) {
-            List<Integer> list = new LinkedList<Integer>();
-            list.add(nums[start]);
-            res.add(list);
-            return res;
-        }
-        List<List<Integer>> lists = permute(nums, start+1);
-        for(List<Integer> list : lists) {
-            for(int i=0;i<list.size();i++) {
-                List<Integer> tmp = new LinkedList<Integer>(list);
-                tmp.add(i, nums[start]);
-                res.add(tmp);
+    private void helper(int[] nums, List<Integer> path, Set<Integer> visited, List<List<Integer>> res) {
+        if (path.size() == nums.length) {
+            res.add(new ArrayList<Integer>(path));
+        } else {
+            for (int num : nums) {
+                if (!visited.contains(num)) {
+                    path.add(num);
+                    visited.add(num);
+                    helper(nums, path, visited, res);
+                    visited.remove(num);
+                    path.remove(path.size() - 1);
+                }
             }
-            List<Integer> tmp = new LinkedList<Integer>(list);
-            tmp.add(nums[start]);
-            res.add(tmp);
         }
-        return res;
     }
 }
