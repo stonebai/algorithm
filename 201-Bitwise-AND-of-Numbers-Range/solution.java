@@ -1,8 +1,11 @@
 public class Solution {
     public int rangeBitwiseAnd(int m, int n) {
-        for (int i = m + 1;i <= n;i++) {
-            m &= i;
+        int count = 0;
+        while (m != n) {
+            m >>= 1;
+            n >>= 1;
+            count++;
         }
-        return m;
+        return m << count;
     }
 }
