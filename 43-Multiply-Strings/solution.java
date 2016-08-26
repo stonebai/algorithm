@@ -9,7 +9,6 @@ public class Solution {
             for (int j = nums2.length - 1;j >= 0;j--) {
                 int cur = (nums1[i] - '0') * (nums2[j] - '0');
                 add(nums, k - (i + j), cur);
-                System.out.println(Arrays.toString(nums));
             }
         }
         StringBuilder sb = new StringBuilder();
