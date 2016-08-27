@@ -6,7 +6,7 @@ public class RandomizedCollection {
     
     /** Initialize your data structure here. */
     public RandomizedCollection() {
-        this.map = new HashMap<Integer, Set<Integer>();
+        this.map = new HashMap<Integer, Set<Integer>>();
         this.list = new ArrayList<Integer>();
         this.random = new Random();
     }
