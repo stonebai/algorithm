@@ -33,13 +33,17 @@ public class RandomizedCollection {
             if (!set.isEmpty()) {
                 int index = set.iterator().next();
                 set.remove(index);
-                int index2 = this.list.size() - 1;
-                int value = this.list.get(index2);
-                this.list.set(index, value);
-                this.list.remove(index2);
-                Set<Integer> set2 = this.map.get(value);
-                set2.remove(index2);
-                set2.add(index);
+                if (this.list.size() == index + 1) {
+                    this.list.remove(index);
+                } else {
+                    int index2 = this.list.size() - 1;
+                    int value = this.list.get(index2);
+                    this.list.set(index, value);
+                    this.list.remove(index2);
+                    Set<Integer> set2 = this.map.get(value);
+                    set2.remove(index2);
+                    set2.add(index);
+                }
                 return true;
             }
         }
