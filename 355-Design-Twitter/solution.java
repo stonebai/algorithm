@@ -53,31 +53,36 @@ public class Twitter {
     /** Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent. */
     public List<Integer> getNewsFeed(int userId) {
         List<Integer> res = new ArrayList<Integer>();
-        if (followship.containsKey(userId)) {
-            Set<Integer> userIds = followship.get(userId);
-            Queue<Integer> q = new PriorityQueue<Integer>(100, new Comparator<Tweet>() {
-                @Override
-                public int compare(Tweet a, Tweet b) {
-                    if (a.time > b.time) {
-                        return 1;
-                    } else if (a.time < b.time) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                }
-            });
-            for (Integer uId : userIds) {
-                if (this.users.containsKey(uId)) {
-                    User user = this.users.get(uId);
-                    if (user.head.next != null) {
-                        q.offer(user.head.next);
-                    }
+        Set<Integer> userIds = new HashSet<Integer>();
+        Queue<Tweet> q = new PriorityQueue<Tweet>(100, new Comparator<Tweet>() {
+            @Override
+            public int compare(Tweet a, Tweet b) {
+                if (a.time > b.time) {
+                    return -1;
+                } else if (a.time < b.time) {
+                    return 1;
+                } else {
+                    return 0;
                 }
             }
-            for (int i = 0;i < 10 && !q.isEmpty();i++) {
-                Tweet tweet = q.poll();
-                res.add(tweet.id);
+        });
+        userIds.add(userId);
+        if (followship.containsKey(userId)) {
+            userIds.addAll(this.followship.get(userId));
+        }
+        for (Integer uId : userIds) {
+            if (this.users.containsKey(uId)) {
+                User user = this.users.get(uId);
+                if (user.head.next != null) {
+                    q.offer(user.head.next);
+                }
+            }
+        }
+        for (int i = 0;i < 10 && !q.isEmpty();i++) {
+            Tweet tweet = q.poll();
+            res.add(tweet.id);
+            if (tweet.next != null) {
+                q.offer(tweet.next);
             }
         }
         return res;
