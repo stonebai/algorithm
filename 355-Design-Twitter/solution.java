@@ -55,7 +55,7 @@ public class Twitter {
         List<Integer> res = new ArrayList<Integer>();
         if (followship.containsKey(userId)) {
             Set<Integer> userIds = followship.get(userId);
-            Queue<Integer> q = new PriorityQueue<Integer>(new Comparator<Tweet>() {
+            Queue<Integer> q = new PriorityQueue<Integer>(100, new Comparator<Tweet>() {
                 @Override
                 public int compare(Tweet a, Tweet b) {
                     if (a.time > b.time) {
