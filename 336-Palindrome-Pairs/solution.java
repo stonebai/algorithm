@@ -1,6 +1,6 @@
 public class Solution {
     public List<List<Integer>> palindromePairs(String[] words) {
-        List<List<Integer>> res = new HashSet<List<Integer>>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         Map<String, Integer> map = new HashMap<String, Integer>();
         for (int i = 0;i < words.length;i++) {
             map.put(words[i], i);
