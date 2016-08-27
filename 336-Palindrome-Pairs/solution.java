@@ -1,6 +1,6 @@
 public class Solution {
     public List<List<Integer>> palindromePairs(String[] words) {
-        Set<List<Integer>> res = new HashSet<List<Integer>>();
+        List<List<Integer>> res = new HashSet<List<Integer>>();
         Map<String, Integer> map = new HashMap<String, Integer>();
         for (int i = 0;i < words.length;i++) {
             map.put(words[i], i);
@@ -16,7 +16,7 @@ public class Solution {
                     }
                 }
             }
-            for (int j = 0;j <= words[i].length();j++) {
+            for (int j = 1;j <= words[i].length();j++) {
                 String str = words[i].substring(0, j);
                 if (isPalindrome(str)) {
                     String tmp = new StringBuilder(words[i].substring(j)).reverse().toString();
@@ -27,7 +27,7 @@ public class Solution {
             }
             map.put(words[i], i);
         }
-        return new ArrayList<List<Integer>>(res);
+        return res;
     }
     
     private boolean isPalindrome(String str) {
@@ -41,7 +41,7 @@ public class Solution {
         return true;
     }
     
-    private void save(Set<List<Integer>> res, int a, int b) {
+    private void save(List<List<Integer>> res, int a, int b) {
         List<Integer> list = new ArrayList<Integer>();
         list.add(a);
         list.add(b);
