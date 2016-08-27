@@ -1,6 +1,6 @@
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
-        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> res = new LinkedList<Integer>();
         for (int i = 1;i <= 9;i++) {
             helper(i, n, res);
         }
