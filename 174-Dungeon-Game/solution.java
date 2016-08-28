@@ -1,6 +1,6 @@
 public class Solution {
     public int calculateMinimumHP(int[][] dungeon) {
-        int row = dungeon.legnth;
+        int row = dungeon.length;
         int col = dungeon[0].length;
         int[][] dp = new int[row--][col--];
         dp[row][col] = dungeon[row][col] >= 0 ? 0 : dungeon[row][col];
