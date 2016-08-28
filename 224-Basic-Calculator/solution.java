@@ -5,7 +5,7 @@ public class Solution {
         int cur = 0;
         boolean isPlus = true;
         Stack<Integer> sNum = new Stack<Integer>();
-        Stack<Boolean> sSign = new Stack<Integer>();
+        Stack<Boolean> sSign = new Stack<Boolean>();
         for (char ch : chs) {
             if (ch >= '0' && ch <= '9') {
                 cur = cur * 10 + ch - '0';
@@ -34,7 +34,7 @@ public class Solution {
                 if (isPlus) {
                     cur += pre;
                 } else {
-                    cur -= pre;
+                    cur = pre - cur;
                 }
                 pre = sNum.pop();
                 isPlus = sSign.pop();
