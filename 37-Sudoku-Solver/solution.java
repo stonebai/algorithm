@@ -1,6 +1,6 @@
 public class Solution {
     
-    private Set<Character> all = new HashSet<Character>();
+    private static Set<Character> all = new HashSet<Character>();
     
     static {
         all.add('1');
