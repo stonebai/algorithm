@@ -1,35 +1,32 @@
 public class Solution {
     public List<Integer> largestDivisibleSubset(int[] nums) {
         List<Integer> res = new ArrayList<Integer>();
-        int max = 0;
         Map<Integer, List<Integer>> map = helper(nums);
+        Map<Integer, List<Integer>> visited = new HashMap<Integer, List<Integer>>();
         for (int num : nums) {
-            List<Integer> tmp = new ArrayList<Integer>();
-            int count = getMaxCount(map, num, tmp);
-            if (count > max) {
-                max = count;
+            List<Integer> tmp = getMaxCount(map, num, visited);
+            if (tmp.size() > res.size()) {
                 res = tmp;
             }
         }
-        Collections.reverse(res);
         return res;
     }
     
-    private int getMaxCount(Map<Integer, List<Integer>> map, int num, List<Integer> path) {
-        int max = 0;
+    private List<Integer> getMaxCount(Map<Integer, List<Integer>> map, int num, Map<Integer, List<Integer>> visited) {
+        if (visited.containsKey(num)) {
+            return new ArrayList<Integer>(visited.get(num));
+        }
         List<Integer> list = map.get(num);
-        List<Integer> l = new ArrayList<Integer>();
+        List<Integer> res = new ArrayList<Integer>();
         for (Integer i : list) {
-            List<Integer> tmp = new ArrayList<Integer>();
-            int count = getMaxCount(map, i.intValue(), tmp);
-            if (count > max) {
-                max = count;
-                l = tmp;
+            List<Integer> tmp = getMaxCount(map, i.intValue(), visited);
+            if (tmp.size() > res.size()) {
+                res = tmp;
             }
         }
-        path.add(num);
-        path.addAll(l);
-        return max + 1;
+        res.add(num);
+        visited.put(num, res);
+        return res;
     }
     
     private Map<Integer, List<Integer>> helper(int[] nums) {
