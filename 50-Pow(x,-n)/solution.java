@@ -1,32 +1,21 @@
 public class Solution {
     public double myPow(double x, int n) {
         if (n < 0) {
-            return neg(x, -n);
+            return 1 / pos(x, -n);
         } else {
             return pos(x, n);
         }
-    }
-    
-    private double neg(double x, int n) {
-        double cur = x;
-        int i = 1;
-        while (i * 2 <= n) {
-            i *= 2;
-            cur *= cur;
-        }
-        return 1 / cur / pos(x, n - i);
     }
     
     private double pos(double x, int n) {
         if (n == 0) {
             return 1;
         }
-        double cur = x;
-        int i = 1;
-        while (i * 2 < n) {
-            i *= 2;
-            cur *= cur;
+        double tmp = pos(x, n / 2);
+        if (n % 2 == 0) {
+            return tmp * tmp;
+        } else {
+            return tmp * tmp * x;
         }
-        return cur * pos(x, n - i);
     }
 }
