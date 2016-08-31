@@ -15,8 +15,7 @@ public class Solution {
             return 2 * lo + 2;
         } else if (hi == lo + 4) {
             return 2 * lo + 4;
-        }
-        if (dp[lo][hi] != 0) {
+        } else if (dp[lo][hi] != 0) {
             return dp[lo][hi];
         }
         int min = Integer.MAX_VALUE;
