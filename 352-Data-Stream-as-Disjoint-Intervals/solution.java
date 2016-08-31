@@ -24,14 +24,11 @@ public class SummaryRanges {
         if (this.left.containsKey(val + 1) && this.right.containsKey(val - 1)) {
             Interval right = this.left.get(val + 1);
             Interval left = this.right.get(val - 1);
-            this.left.remove(left.start);
-            this.right.remove(right.end);
+            this.right.remove(left.end);
+            this.left.remove(right.start);
             delete(this.list, right);
-            delete(this.list, left);
-            Interval in = new Interval(left.start, right.end);
-            this.left.put(in.start, in);
-            this.right.put(in.end, in);
-            add(this.list, in);
+            left.end = right.end;
+            this.right.put(left.end, left);
         } else if (this.left.containsKey(val + 1)) {
             Interval right = this.left.get(val + 1);
             this.left.remove(right.start);
@@ -56,7 +53,7 @@ public class SummaryRanges {
     
     private static void add(List<Interval> list, Interval in) {
         int start = 0, end = list.size() - 1;
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
             int tmp = list.get(mid).start;
             if (tmp < in.start) {
@@ -68,6 +65,7 @@ public class SummaryRanges {
                 return;
             }
         }
+        System.out.println("start: " + start + "\tend: " + end);
         if (end == -1) {
             list.add(0, in);
         } else if (start == list.size()) {
