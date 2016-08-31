@@ -21,6 +21,7 @@ public class SummaryRanges {
     }
     
     public void addNum(int val) {
+        if (contain(this.list, val)) return;
         if (this.left.containsKey(val + 1) && this.right.containsKey(val - 1)) {
             Interval right = this.left.get(val + 1);
             Interval left = this.right.get(val - 1);
@@ -51,6 +52,22 @@ public class SummaryRanges {
         return this.list;
     }
     
+    private static boolean contain(List<Interval> list, int val) {
+        int start = 0, end = list.size() - 1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            Interval in = list.get(mid);
+            if (val < in.start) {
+                end = mid - 1;
+            } else if (val > in.end) {
+                start = mid + 1;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     private static void add(List<Interval> list, Interval in) {
         int start = 0, end = list.size() - 1;
         while (start <= end) {
@@ -65,7 +82,7 @@ public class SummaryRanges {
                 return;
             }
         }
-        System.out.println("start: " + start + "\tend: " + end);
+        //System.out.println("start: " + start + "\tend: " + end);
         if (end == -1) {
             list.add(0, in);
         } else if (start == list.size()) {
@@ -77,7 +94,7 @@ public class SummaryRanges {
     
     private static void delete(List<Interval> list, Interval in) {
         int start = 0, end = list.size() - 1;
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
             int tmp = list.get(mid).start;
             if (tmp < in.start) {
@@ -86,6 +103,7 @@ public class SummaryRanges {
                 end = mid - 1;
             } else {
                 list.remove(mid);
+                return;
             }
         }
     }
