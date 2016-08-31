@@ -1,5 +1,6 @@
 public class Solution {
     public int getMoneyAmount(int n) {
+        int[][] dp = new int[n + 1][n + 1];
         return helper(1, n);
     }
     
@@ -15,6 +16,9 @@ public class Solution {
         } else if (hi == lo + 4) {
             return 2 * lo + 4;
         }
+        if (dp[lo][hi] != 0) {
+            return dp[lo][hi];
+        }
         int min = Integer.MAX_VALUE;
         for (int i = lo;i <= hi;i++) {
             int a = helper(lo, i - 1);
@@ -22,6 +26,7 @@ public class Solution {
             int c = Math.max(a, b);
             min = Math.min(min, c + i);
         }
+        dp[lo][hi] = min;
         return min;
     }
 }
