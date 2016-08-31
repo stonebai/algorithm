@@ -11,7 +11,7 @@ public class Solution {
     }
     
     private int dfs(int[][] matrix, int i, int j, int num, int[][] dp) {
-        if (i < matrix.length && j < matrix[i].length && num < matrix[i][j]) {
+        if (i >= 0 && i < matrix.length && j >= 0 && j < matrix[i].length && num < matrix[i][j]) {
             if (dp[i][j] != 0) {
                 return dp[i][j];
             }
