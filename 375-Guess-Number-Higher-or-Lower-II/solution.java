@@ -22,7 +22,6 @@ public class Solution {
             int c = Math.max(a, b);
             min = Math.min(min, c + i);
         }
-        System.out.println("lo: " + lo + "\thi: " + hi + "\tmin: " + min);
         return min;
     }
 }
