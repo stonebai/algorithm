@@ -1,10 +1,10 @@
 public class Solution {
     public int getMoneyAmount(int n) {
         int[][] dp = new int[n + 1][n + 1];
-        return helper(1, n);
+        return helper(1, n, dp);
     }
     
-    private int helper(int lo, int hi) {
+    private int helper(int lo, int hi, int[][] dp) {
         if (lo >= hi) {
             return 0;
         } else if (hi == lo + 1) {
