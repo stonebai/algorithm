@@ -21,8 +21,8 @@ public class Solution {
         }
         int min = Integer.MAX_VALUE;
         for (int i = lo;i <= hi;i++) {
-            int a = helper(lo, i - 1);
-            int b = helper(i + 1, hi);
+            int a = helper(lo, i - 1, dp);
+            int b = helper(i + 1, hi, dp);
             int c = Math.max(a, b);
             min = Math.min(min, c + i);
         }
