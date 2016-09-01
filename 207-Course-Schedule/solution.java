@@ -2,7 +2,13 @@ public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
         fillMap(prerequisites, map);
-        return !findLoops(map);
+        Set<Integer> dp = new HashSet<Integer>();
+        for (Integer i : map.keySet()) {
+            if (!dfs(i, map, new HashSet<Integer>(), dp)) {
+                return false;
+            }
+        }
+        return true;
     }
     
     private void fillMap(int[][] pres, Map<Integer, Set<Integer>> map) {
@@ -17,26 +23,25 @@ public class Solution {
         }
     }
     
-    private boolean findLoops(Map<Integer, List<Integer>> map) {
-        for (Integer i : map.keySet()) {
-            Set<Integer> visited = new HashSet<Integer>();
-            Stack<Integer> stack = new Stack<Integer>();
-            stack.push(i);
-            visited.add(i);
-            while (!stack.isEmpty()) {
-                Integer tmp = stack.pop();
-                if (visited.contains(tmp)) {
-                    return true;
-                } else {
-                    visited.add(tmp);
-                }
-                if (map.containsKey(tmp)) {
-                    for (Integer j : map.get(tmp)) {
-                        stack.push(j);
-                    }
+    private boolean dfs(Integer num, Map<Integer, Set<Integer>> map, Set<Integer> visited, Set<Integer> dp) {
+        if (visited.contains(num)) {
+            return false;
+        } else {
+            visited.add(num);
+        }
+        if (dp.contains(num)) {
+            visited.remove(num);
+            return true;
+        }
+        if (map.containsKey(num)) {
+            for (Integer i : map.get(num)) {
+                if (!dfs(i, map, visited, dp)) {
+                    return false;
                 }
             }
         }
-        return false;
+        visited.remove(num);
+        dp.add(num);
+        return true;
     }
 }
