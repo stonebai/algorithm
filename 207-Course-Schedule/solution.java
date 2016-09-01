@@ -2,9 +2,9 @@ public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
         fillMap(prerequisites, map);
-        Set<Integer> dp = new HashSet<Integer>();
+        boolean[] dp = new boolean[numCourses];
         for (Integer i : map.keySet()) {
-            if (!dfs(i, map, new HashSet<Integer>(), dp)) {
+            if (!dfs(i, map, new boolean[numCourses], dp)) {
                 return false;
             }
         }
@@ -23,14 +23,14 @@ public class Solution {
         }
     }
     
-    private boolean dfs(Integer num, Map<Integer, Set<Integer>> map, Set<Integer> visited, Set<Integer> dp) {
-        if (visited.contains(num)) {
+    private boolean dfs(Integer num, Map<Integer, Set<Integer>> map, boolean[] visited, boolean[] dp) {
+        if (visited[nun.intValue()]) {
             return false;
         } else {
-            visited.add(num);
+            visited[nun.intValue()] = true;
         }
-        if (dp.contains(num)) {
-            visited.remove(num);
+        if (dp[nun.intValue()]) {
+            visited[nun.intValue()] = false;
             return true;
         }
         if (map.containsKey(num)) {
@@ -40,8 +40,8 @@ public class Solution {
                 }
             }
         }
-        visited.remove(num);
-        dp.add(num);
+        visited[nun.intValue()] = false;
+        dp[nun.intValue()] = true;
         return true;
     }
 }
