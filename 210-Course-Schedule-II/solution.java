@@ -1,6 +1,6 @@
 public class Solution {
     public int[] findOrder(int num, int[][] pre) {
-        Map<Integer, Set<Integer>> map = getMap(int[][] pre);
+        Map<Integer, Set<Integer>> map = getMap(pre);
         List<Integer> list = new ArrayList<Integer>();
         boolean[] courses = new boolean[num];
         for (int i = 0;i < num;i++) {
