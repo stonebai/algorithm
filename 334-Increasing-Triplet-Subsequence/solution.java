@@ -18,7 +18,7 @@ public class Solution {
         }
         int start = 0;
         while (start < end) {
-            int mid = start + (end - start);
+            int mid = start + (end - start) / 2;
             if (list.get(mid) > num) {
                 end = mid;
             } else if (list.get(mid) < num) {
