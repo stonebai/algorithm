@@ -1,38 +1,45 @@
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
-        int lo = 0, hi = nums.length - 1;
-        k = nums.length - k;
+        k--;
+        int i = 0, j = nums.length;
         while (true) {
-            int index = partition(nums, lo, hi);
+            int index = partition(nums, i, j);
             if (index > k) {
-                hi = index - 1;
+                j = index - 1;
             } else if (index < k) {
-                lo = index + 1;
+                i = index + 1;
             } else {
-                return nums[k];
+                return index;
             }
         }
     }
     
     private int partition(int[] nums, int lo, int hi) {
-        if (lo == hi) return lo;
-        int mid = lo + (hi - lo) / 2;
-        int pivot = nums[mid];
-        int pivotIndex = lo;
-        swap(nums, lo, mid);
-        while(true) {
-            while(pivotIndex < hi && nums[hi] >= pivot) hi--;
-            while(lo <= hi && nums[lo] <= pivot) lo++;
-            if (lo >= hi) break;
-            swap(nums, lo++, hi--);
+        int p = nums[lo];
+        int i = lo + 1, j = hi;
+        while (i < j) {
+            while (i < j && nums[i] >= p) i++;
+            while (i < j && nums[j] <= p) j--;
+            if (i >= j) break;
+            swap(nums, i++, j--);
         }
-        swap(nums, hi, pivotIndex);
-        return hi;
+        if (i == j) {
+            if (nums[i] >= p) {
+                swap(nums, i, lo);
+                return i;
+            } else {
+                swap(nums, i - 1, lo);
+                return i - 1;
+            }
+        } else {
+            swap(nums, j, lo);
+            return j;
+        }
     }
     
-    private void swap(int[] nums, int a, int b) {
-        int tmp = nums[a];
-        nums[a] = nums[b];
-        nums[b] = tmp;
+    private void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
     }
 }
