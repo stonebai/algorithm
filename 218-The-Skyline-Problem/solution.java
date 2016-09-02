@@ -19,7 +19,7 @@ public class Solution {
         while (!pq.isEmpty()) {
             Node node = pq.poll();
             if (node.isLeft) {
-                if (node.h > map.lastEntry().getKey()) {
+                if (map.isEmpty() || node.h > map.lastEntry().getKey()) {
                     int[] e = new int[2];
                     e[0] = node.x;
                     e[1] = node.h;
@@ -37,11 +37,18 @@ public class Solution {
                 } else {
                     map.put(node.h, num - 1);
                 }
-                int hi = map.lastEntry().getKey();
-                if (node.h > hi) {
+                if (!map.isEmpty()) {
+                    int hi = map.lastEntry().getKey();
+                    if (node.h > hi) {
+                        int[] e = new int[2];
+                        e[0] = node.x;
+                        e[1] = hi;
+                        res.add(e);
+                    }
+                } else {
                     int[] e = new int[2];
                     e[0] = node.x;
-                    e[1] = hi;
+                    e[1] = 0;
                     res.add(e);
                 }
             }
