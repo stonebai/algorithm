@@ -21,19 +21,19 @@ public class Solution {
         int i = index + 1;
         while (i < split.length && split[i].startsWith(prefix)) {
             if (split[i].contains(".")) {
-                res[0] = Math.max(res[0], split[i].length() - prefix.length() + 1);
+                res[0] = Math.max(res[0], split[i].length() - prefix.length());
                 i++;
             } else {
                 int[] nums = dfs(split, i, level + 1);
-                res[0] = Math.max(res[0], nums[0] + 1);
-                i = res[1];
+                res[0] = Math.max(res[0], nums[0]);
+                i = nums[1];
             }
         }
-        if (res > 0) {
-            return res - prefix.length() + split[index].length() + 1;
-        } else {
-            return 0;
+        if (res[0] > 0) {
+            res[0] += split[index].length() - prefix.length() + 2;
         }
+        res[1] = i;
+        return res;
     }
     
     private String prefix(int n) {
