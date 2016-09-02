@@ -23,14 +23,14 @@ public class Solution {
         }
     }
     
-    private boolean dfs(Integer num, Map<Integer, Set<Integer>> map, boolean[] visited, boolean[] dp) {
-        if (visited[num.intValue()]) {
+    private boolean dfs(int num, Map<Integer, Set<Integer>> map, boolean[] visited, boolean[] dp) {
+        if (visited[num]) {
             return false;
         } else {
-            visited[num.intValue()] = true;
+            visited[num] = true;
         }
-        if (dp[num.intValue()]) {
-            visited[num.intValue()] = false;
+        if (dp[num]) {
+            visited[num] = false;
             return true;
         }
         if (map.containsKey(num)) {
@@ -40,8 +40,8 @@ public class Solution {
                 }
             }
         }
-        visited[num.intValue()] = false;
-        dp[num.intValue()] = true;
+        visited[num] = false;
+        dp[num] = true;
         return true;
     }
 }
