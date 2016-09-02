@@ -57,7 +57,7 @@
 public class Solution {
     public int[] findOrder(int num, int[][] pre) {
         int[] res = new int[num];
-        Set<Integer>[] g = new HashSet<Integer>[num];
+        HashSet<Integer>[] g = new HashSet<Integer>[num];
         int[] d = new int[num];
         initialization(pre, g, d);
         Queue<Integer> q = new LinkedList<Integer>();
