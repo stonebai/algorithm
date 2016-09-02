@@ -1,7 +1,7 @@
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
         k--;
-        int i = 0, j = nums.length;
+        int i = 0, j = nums.length - 1;
         while (true) {
             int index = partition(nums, i, j);
             if (index > k) {
@@ -9,7 +9,7 @@ public class Solution {
             } else if (index < k) {
                 i = index + 1;
             } else {
-                return index;
+                return nums[index];
             }
         }
     }
