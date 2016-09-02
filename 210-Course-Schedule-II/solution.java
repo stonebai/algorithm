@@ -57,7 +57,7 @@
 public class Solution {
     public int[] findOrder(int num, int[][] pre) {
         int[] res = new int[num];
-        HashSet<Integer>[] g = new HashSet<Integer>[num];
+        HashSet[] g = new HashSet[num];
         int[] d = new int[num];
         initialization(pre, g, d);
         Queue<Integer> q = new LinkedList<Integer>();
@@ -70,11 +70,12 @@ public class Solution {
         int index = 0;
         while (!q.isEmpty()) {
             int course = q.poll();
+            System.out.println(course);
             res[index++] = course;
             if (g[course] != null) {
-                for (int c : g[course]) {
-                    if (--d[c] == 0) {
-                        q.offer(c);
+                for (Object c : g[course]) {
+                    if (--d[(int)c] == 0) {
+                        q.offer((int)c);
                         count++;
                     }
                 }
@@ -87,10 +88,11 @@ public class Solution {
     private void initialization(int[][] pre, Set<Integer>[] g, int[] d) {
         for (int[] p : pre) {
             if (g[p[1]] == null) {
-                g[p[1]] = new HashSet<Integer>();
+                g[p[1]] = new HashSet();
             }
-            g[p[1]].add(p[0]);
-            d[p[0]]++;
+            if (g[p[1]].add(p[0])) {
+                d[p[0]]++;
+            }
         }
     }
 }
