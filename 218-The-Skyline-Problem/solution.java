@@ -73,8 +73,8 @@ public class Solution {
             }
         });
         for (int[] building : buildings) {
-            pq.offer(new Node(building[0], building[2], true);
-            pq.offer(new Node(building[1], building[2], false);
+            pq.offer(new Node(building[0], building[2], true));
+            pq.offer(new Node(building[1], building[2], false));
         }
         return pq;
     }
