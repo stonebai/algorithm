@@ -3,7 +3,7 @@ public class Solution {
         Map<Integer, Set<Integer>> map = new HashMap<Integer, Set<Integer>>();
         fillMap(prerequisites, map);
         boolean[] dp = new boolean[numCourses];
-        for (Integer i : map.keySet()) {
+        for (int i : map.keySet()) {
             if (!dfs(i, map, new boolean[numCourses], dp)) {
                 return false;
             }
