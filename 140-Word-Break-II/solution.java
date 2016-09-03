@@ -11,7 +11,7 @@ public class Solution {
     }
     
     public List<String> wordBreak(String s, Set<String> wordDict) {
-        Node root = buildTrie(Set<String> wordDict);
+        Node root = buildTrie(wordDict);
         return dfs(s, root, new HashMap<String, List<String>>());
     }
     
@@ -30,10 +30,16 @@ public class Solution {
             } else {
                 cur = cur.next[offset];
                 if (cur.isWord) {
-                    List<String> list = dfs(s.substring(i + 1), root, map);
-                    String prefix = s.substring(0, i + 1);
-                    for (String str : list) {
-                        res.add(prefix + " " + str);
+                    if (i + 1 < s.length()) {
+                        List<String> list = dfs(s.substring(i + 1), root, map);
+                        String prefix = s.substring(0, i + 1);
+                        for (String str : list) {
+                            res.add(prefix + " " + str);
+                        }   
+                    } else {
+                        res.add(s);
+                        map.put(s, res);
+                        return res;
                     }
                 }
             }
