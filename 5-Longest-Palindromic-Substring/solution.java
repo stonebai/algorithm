@@ -5,15 +5,15 @@ public class Solution {
         String res = "";
         for (int i = 0;i < chs.length;i++) {
             int odd = odd(chs, i);
-            int even = odd(chs, i);
+            int even = even(chs, i);
             if (odd > even && odd > max) {
                 max = odd;
                 int radix = (odd - 1) / 2;
                 res = s.substring(i - radix, i + radix + 1);
             } else if (even > odd && even > max) {
-                max = even
+                max = even;
                 int radix = even / 2;
-                res = s.substring(i - radix + 1, i + radix);
+                res = s.substring(i - radix + 1, i + radix + 1);
             }
         }
         return res;
@@ -24,6 +24,8 @@ public class Solution {
         while (left >= 0 && right < chs.length) {
             if (chs[left--] == chs[right++]) {
                 count += 2;
+            } else {
+                break;
             }
         }
         return count;
@@ -34,6 +36,8 @@ public class Solution {
         while (i >= 0 && j < chs.length) {
             if (chs[i--] == chs[j++]) {
                 count += 2;
+            } else {
+                break;
             }
         }
         return count;
