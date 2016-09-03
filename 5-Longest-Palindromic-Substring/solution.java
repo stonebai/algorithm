@@ -1,11 +1,20 @@
 public class Solution {
     public String longestPalindrome(String s) {
         char[] chs = s.toCharArray();
-        int res = 0;
+        int max = 0;
+        String res = "";
         for (int i = 0;i < chs.length;i++) {
             int odd = odd(chs, i);
             int even = odd(chs, i);
-            res = Math.max(res, Math.max(odd, even));
+            if (odd > even && odd > max) {
+                max = odd;
+                int radix = (odd - 1) / 2;
+                res = s.substring(i - radix, i + radix + 1);
+            } else if (even > odd && even > max) {
+                max = even
+                int radix = even / 2;
+                res = s.substring(i - radix + 1, i + radix);
+            }
         }
         return res;
     }
