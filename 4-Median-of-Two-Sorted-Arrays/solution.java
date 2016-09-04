@@ -41,9 +41,9 @@ public class Solution {
                 }
             }
         }
-        if (i1 != -1 && i2 != -1) {
-            return Math.min(nums1[i1 - 1], nums2[i2 - 1]);
-        } else if (i1 != -1) {
+        if (i1 > 0 && i2 > 0) {
+            return Math.max(nums1[i1 - 1], nums2[i2 - 1]);
+        } else if (i1 > 0) {
             return nums1[i1 - 1];
         } else {
             return nums2[i2 - 1];
@@ -51,9 +51,9 @@ public class Solution {
     }
     
     private int findK(int[] nums, int start, int k) {
-        if (start + k > nums.length) {
+        if (start == nums.length) {
             return -1;
-        } else if (start < nums.length) {
+        } else if (start + k > nums.length) {
             return nums.length - 1;
         } else {
             return start + k - 1;
