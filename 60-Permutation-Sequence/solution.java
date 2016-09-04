@@ -8,6 +8,7 @@ public class Solution {
         m = m / j - 1;
         int[] nums = generateNums(n, j - 2);
         for (int i = 1;i < k - m;i++) {
+            System.out.println(toString(nums));
             nextPermutation(nums);
         }
         return toString(nums);
