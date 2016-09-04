@@ -20,12 +20,12 @@ public class Solution {
             } else {
                 helper(str, chs, index + 1, path + "+" + 0, res, val, target, 0);
                 helper(str, chs, index + 1, path + "-" + 0, res, val, target, 0);
-                helper(str, chs, index + 1, path + "+" + 0, res, val - mul, target, 0);
+                helper(str, chs, index + 1, path + "*" + 0, res, val - mul, target, 0);
             }
         } else {
             for (int i = index;i < chs.length;i++) {
                 String s = str.substring(index, i + 1);
-                long num = Long.parseInt(s);
+                long num = Long.parseLong(s);
                 if (index == 0) {
                     helper(str, chs, i + 1, s, res, num, target, num);
                 } else {
