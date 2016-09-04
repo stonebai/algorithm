@@ -14,18 +14,23 @@ public class Solution {
         int i1 = 0, i2 = 0;
         while (k > 0) {
             int t = k == 1 ? 1 : k / 2;
-            int r1 = findK(nums1, i1, t);
-            int r2 = findK(nums2, i2, t);
+            int r1 = 0, r2 = 0;
+            if (i1 < 0) r1 = -1;
+            else r1 = findK(nums1, i1, t);
+            if (i2 < 0) r2 = -1;
+            else r2 = findK(nums2, i2, t);
             if (r1 == -1) {
                 int num = r2 - i2 + 1;
                 k -= num;
                 i2 = r2 + 1;
+                i1 = -1;
             } else if (r2 == -1) {
                 int num = r1 - i1 + 1;
                 k -= num;
                 i1 = r1 + 1;
+                i2 = -1;
             } else {
-                if (nums1[i1] <= nums2[i2]) {
+                if (nums1[r1] <= nums2[r2]) {
                     int num = r1 - i1 + 1;
                     k -= num;
                     i1 = r1 + 1;
@@ -36,12 +41,12 @@ public class Solution {
                 }
             }
         }
-        if (i1 != -1 && i1 != nums1.length && i2 != -1 && i2 < nums2.length) {
-            return Math.min(nums1[i1], nums2[i2]);
-        } else if (i1 != -1 && i1 < nums1.length) {
-            return nums1[i1];
+        if (i1 != -1 && i2 != -1) {
+            return Math.min(nums1[i1 - 1], nums2[i2 - 1]);
+        } else if (i1 != -1) {
+            return nums1[i1 - 1];
         } else {
-            return nums2[i2];
+            return nums2[i2 - 1];
         }
     }
     
