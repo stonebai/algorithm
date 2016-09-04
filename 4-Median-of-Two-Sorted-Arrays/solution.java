@@ -36,9 +36,9 @@ public class Solution {
                 }
             }
         }
-        if (i1 < nums1.length && i2 < nums2.length) {
+        if (i1 != -1 && i1 != nums1.length && i2 != -1 && i2 < nums2.length) {
             return Math.min(nums1[i1], nums2[i2]);
-        } else if (i1 < nums1.length) {
+        } else if (i1 != -1 && i1 < nums1.length) {
             return nums1[i1];
         } else {
             return nums2[i2];
