@@ -9,8 +9,9 @@ public class Solution {
             } else if (tmp > target) {
                 j--;
             } else {
-                res[0] = i;
-                res[1] = j;
+                res[0] = i + 1;
+                res[1] = j + 1;
+                break;
             }
         }
         return res;
