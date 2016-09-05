@@ -18,7 +18,7 @@ public class Solution {
     private boolean startsWith(int num) {
         int x = 1 << 7;
         int y = 1 << 6;
-        return num & x != 0 && num & y == 0;
+        return (num & x) != 0 && (num & y) == 0;
     }
     
     private int count(int num) {
