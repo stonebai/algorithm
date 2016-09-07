@@ -3,32 +3,33 @@ public class Solution {
         Set<Character> all = getSet(words);
         Map<Character, Set<Character>> map = preprocess(words);
         StringBuilder sb = new StringBuilder();
+        boolean[] dp = new boolean[26];
         for (char key : all) {
-            if (dfs(key, map, sb, new boolean[26], all)) {
+            if (dfs(key, map, sb, new boolean[26], dp)) {
                 return "";
             }
         }
         return sb.toString();
     }
     
-    private boolean dfs(char key, Map<Character, Set<Character>> map, StringBuilder sb, boolean[] visited, Set<Character> all) {
+    private boolean dfs(char key, Map<Character, Set<Character>> map, StringBuilder sb, boolean[] visited, boolean[] dp) {
         int index = key - 'a';
         if (visited[index]) {
             return true;
         }
-        if (!all.contains(key)) {
+        if (dp[index]) {
             return false;
         }
         visited[index] = true;
         if (map.containsKey(key)) {
             for (char ch : map.get(key)) {
-                if (dfs(ch, map, sb, visited, all)) {
+                if (dfs(ch, map, sb, visited, dp)) {
                     return true;
                 }
             }
         }
         visited[index] = false;
-        all.remove(key);
+        dp[index] = true;
         sb.insert(0, key);
         return false;
     }
