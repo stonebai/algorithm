@@ -17,6 +17,7 @@ public class Solution {
         if (visited[i][j]) {
             return false;
         }
+        visited[i][j] = true;
         int a = i, b = j;
         while (a < chs.length && b < chp.length) {
             if (chp[b] == '*') {
@@ -29,16 +30,9 @@ public class Solution {
                 a++;
                 b++;
             } else {
-                visited[i][j] = true;
                 return false;
             }
         }
-        boolean res = dfs(chs, a, chp, b, visited);
-        if (res) {
-            return true;
-        } else {
-            visited[i][j] = true;
-            return false;
-        }
+        return dfs(chs, a, chp, b, visited);
     }
 }
