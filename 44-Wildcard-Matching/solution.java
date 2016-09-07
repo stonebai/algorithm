@@ -16,7 +16,11 @@ public class Solution {
         int i = 0;
         for (;i < chs.length && i < chp.length;i++) {
             if (chp[i] == '*') {
-                return isMatch(s.substring(i), p.substring(i + 1)) || isMatch(s.substring(i + 1), p.substring(i));
+                int j = i + 1;
+                while (j < chp.length && chp[j] == '*') {
+                    j++;
+                }
+                return isMatch(s.substring(i), p.substring(j)) || isMatch(s.substring(i + 1), p.substring(j - 1));
             } else if (chp[i] == '?' || chs[i] == chp[i]) {
                 continue;
             } else {
