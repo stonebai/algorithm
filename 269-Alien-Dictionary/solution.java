@@ -1,39 +1,39 @@
 public class Solution {
     public String alienOrder(String[] words) {
-        Map<Character, Set<Character>> map = getMap(words);
+        Set<Character> all = getSet(words);
+        Map<Character, Set<Character>> map = preprocess(words);
         StringBuilder sb = new StringBuilder();
-        boolean[] dp = new boolean[26];
-        for (Map.Entry<Character, Set<Character>> entry : map.entrySet()) {
-            if (dfs(entry.getKey(), map, sb, new boolean[26], dp)) {
+        for (char key : all) {
+            if (dfs(key, map, sb, new boolean[26], all)) {
                 return "";
             }
         }
         return sb.toString();
     }
     
-    private boolean dfs(char key, Map<Character, Set<Character>> map, StringBuilder sb, boolean[] visited, boolean[] dp) {
+    private boolean dfs(char key, Map<Character, Set<Character>> map, StringBuilder sb, boolean[] visited, Set<Character> all) {
         int index = key - 'a';
         if (visited[index]) {
             return true;
         }
-        if (dp[index]) {
+        if (!all.contains(key)) {
             return false;
         }
         visited[index] = true;
         if (map.containsKey(key)) {
             for (char ch : map.get(key)) {
-                if (dfs(ch, map, sb, visited, dp)) {
+                if (dfs(ch, map, sb, visited, all)) {
                     return true;
                 }
             }
         }
         visited[index] = false;
-        dp[index] = true;
+        all.remove(key);
         sb.insert(0, key);
         return false;
     }
     
-    private Map<Character, Set<Character>> getMap(String[] words) {
+    private Map<Character, Set<Character>> preprocess(String[] words) {
         Map<Character, Set<Character>> map = new HashMap<Character, Set<Character>>();
         for (int i = 1;i < words.length;i++) {
             add(words[i - 1].toCharArray(), words[i].toCharArray(), map);
@@ -55,7 +55,19 @@ public class Solution {
                     set.add(chs2[j]);
                     map.put(chs1[i], set);
                 }
+                return;
             }
         }
+    }
+    
+    private Set<Character> getSet(String[] words) {
+        Set<Character> set = new HashSet<Character>();
+        for (String word : words) {
+            char[] chs = word.toCharArray();
+            for (char ch : chs) {
+                set.add(ch);
+            }
+        }
+        return set;
     }
 }
