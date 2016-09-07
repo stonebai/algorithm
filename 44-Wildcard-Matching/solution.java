@@ -1,42 +1,37 @@
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if (s == null || p == null) return false;
-        int i = 0, j = 0;
-        int tmpI = -1, tmpJ = -1;
-        char[] ss = s.toCharArray();
-        char[] ps = p.toCharArray();
-        while(i < ss.length) {
-            if (j == ps.length) {
-                if (tmpJ == -1) {
+        if (p.length() == 0) {
+            return s.length() == 0;
+        } else if (s.length() == 0) {
+            char[] chp = p.toCharArray();
+            for (char ch : chp) {
+                if (ch != '*') {
                     return false;
-                } else {
-                    i = ++tmpI;
-                    j = tmpJ;
                 }
-            } else if (ps[j] == '*') {
-                j++;
-                while(j < ps.length && ps[j] == '*') {
-                    j++;
-                }
-                tmpI = i;
-                tmpJ = j;
-            } else if (ps[j] == '?' || ps[j] == ss[i]) {
-                i++;
-                j++;
-            } else if (tmpJ != -1) {
-                i = ++tmpI;
-                j = tmpJ;
+            }
+            return true;
+        }
+        char[] chs = s.toCharArray();
+        char[] chp = p.toCharArray();
+        int i = 0;
+        for (;i < chs.length && i < chp.length;i++) {
+            if (chp[i] == '*') {
+                return isMatch(s.substring(i), p.substring(i + 1)) || isMatch(s.substring(i + 1), p.substring(i));
+            } else if (chp[i] == '?' || chs[i] == chp[i]) {
+                continue;
             } else {
                 return false;
             }
         }
-        while(j < ps.length) {
-            if (ps[j] == '*') {
-                j++;
-            } else {
-                return false;
+        if (i == chp.length) {
+            return i == chs.length;
+        } else {
+            for (;i< chp.length;i++) {
+                if (chp[i] != '*') {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
     }
 }
