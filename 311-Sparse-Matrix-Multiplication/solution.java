@@ -1,11 +1,7 @@
 public class Solution {
     public int[][] multiply(int[][] A, int[][] B) {
-        int row = A.length, col = B.length;
+        int row = A.length, n = B.length, col = B[0].length;
         int[][] res = new int[row][col];
-        if (row == 0 || col == 0) {
-            return res;
-        }
-        int n = A[0].length;
         List[] ma = new List[row];
         for (int i = 0;i < row;i++) {
             ma[i] = new ArrayList<Integer>();
