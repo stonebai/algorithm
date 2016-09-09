@@ -14,26 +14,17 @@ public class Solution extends Relation {
                 }
                 if (knows(j, i)) {
                     dp[j] = true;
+                    if (knows(i, j)) {
+                        dp[i] = true;
+                        break;
+                    }
                 } else {
                     dp[i] = true;
                     break;
                 }
             }
             if (!dp[i]) {
-                for (int j = 0;j < n;j++) {
-                    if (i == j) {
-                        continue;
-                    }
-                    if (knows(i, j)) {
-                        dp[i] = true;
-                        break;
-                    } else {
-                        dp[j] = true;
-                    }
-                }
-                if (!dp[i]) {
-                    return i;
-                }
+                return i;
             }
         }
         return -1;
