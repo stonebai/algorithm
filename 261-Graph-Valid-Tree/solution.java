@@ -1,7 +1,8 @@
 public class Solution {
     public boolean validTree(int n, int[][] edges) {
+        int[] res = initialize(n);
         for (int[] edge : edges) {
-            if (union(res, edge[0], edge[1])) {
+            if (!union(res, edge[0], edge[1])) {
                 return false;
             }
         }
