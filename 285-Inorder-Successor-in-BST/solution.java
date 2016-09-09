@@ -10,10 +10,10 @@
 public class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
         Deque<TreeNode> deque = new ArrayDeque<TreeNode>();
-        deque.offerFirst(root);
+        deque.offerLast(root);
         TreeNode pre = null;
         while (!deque.isEmpty()) {
-            TreeNode node = deque.pollFirst();
+            TreeNode node = deque.pollLast();
             if (node.val == p.val) {
                 if (node.right != null) {
                     return mostLeft(node.right);
@@ -22,14 +22,14 @@ public class Solution {
                 }
             } else if (node.val > p.val) {
                 if (node.left != null) {
-                    deque.offerFirst(node.left);
+                    deque.offerLast(node.left);
                     pre = node;
                 } else {
                     return null;
                 }
             } else {
                 if (node.right != null) {
-                    deque.offerFirst(node.right);
+                    deque.offerLast(node.right);
                 } else {
                     return null;
                 }
