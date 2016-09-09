@@ -9,7 +9,7 @@
  */
 public class Solution {
     
-    private static class Node implements Comparaber<Node> {
+    private static class Node implements Comparable<Node> {
         int x;
         boolean isStart;
         
@@ -23,9 +23,9 @@ public class Solution {
             if (this.x != o.x) {
                 return this.x - o.x;
             } else {
-                if (this.isStart && o.isStart) {
+                if (!this.isStart && !o.isStart) {
                     return 0;
-                } else if (this.isStart) {
+                } else if (!this.isStart) {
                     return -1;
                 } else {
                     return 1;
