@@ -11,6 +11,7 @@ public class Solution {
                 count--;
             }
         }
+        return count;
     }
     
     private void union(int[] uf, int i, int j) {
