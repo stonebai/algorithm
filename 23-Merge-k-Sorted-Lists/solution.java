@@ -17,8 +17,10 @@ public class Solution {
                 return a.val - b.val;
             }
         });
-        for (ListNode node : lists) {
-            q.offer(node);
+        for (int i = 0;i < lists.length;i++) {
+            if (lists[i] != null) {
+                q.offer(lists[i]);
+            }
         }
         ListNode dummy = new ListNode(0);
         ListNode cur = dummy;
