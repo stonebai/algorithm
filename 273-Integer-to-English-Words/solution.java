@@ -51,32 +51,31 @@ public class Solution {
                 case 19:
                     return "Nineteen";
             }
-        } else {
-            StringBuilder sb = new StringBuilder();
-            if (num < 30) {
-                sb.append("Twenty");
-            } else if (num < 40) {
-                sb.append("Thirty");
-            } else if (num < 50) {
-                sb.append("Forty");
-            } else if (num < 60) {
-                sb.append("Fifty");
-            } else if (num < 70) {
-                sb.append("Sixty");
-            } else if (num < 80) {
-                sb.append("Seventy");
-            } else if (num < 90) {
-                sb.append("Eighty");
-            } else {
-                sb.append("Ninety");
-            }
-            num %= 10;
-            if (num != 0) {
-                sb.append(" ");
-                sb.append(oneDigit(num));
-            }
-            return sb.toString();
         }
+        StringBuilder sb = new StringBuilder();
+        if (num < 30) {
+            sb.append("Twenty");
+        } else if (num < 40) {
+            sb.append("Thirty");
+        } else if (num < 50) {
+            sb.append("Forty");
+        } else if (num < 60) {
+            sb.append("Fifty");
+        } else if (num < 70) {
+            sb.append("Sixty");
+        } else if (num < 80) {
+            sb.append("Seventy");
+        } else if (num < 90) {
+            sb.append("Eighty");
+        } else {
+            sb.append("Ninety");
+        }
+        num %= 10;
+        if (num != 0) {
+            sb.append(" ");
+            sb.append(oneDigit(num));
+        }
+        return sb.toString();
     }
     
     private String threeDigits(int num) {
@@ -106,17 +105,26 @@ public class Solution {
         if (num == 0) {
             return s1;
         }
+        if (s1.length() != 0) {
+            s1 = " " + s1;
+        }
         String s2 = threeDigits(num % 1000);
         num /= 1000;
         if (num == 0) {
-            return s2 + " Thousand " + s1;
+            return s2 + " Thousand" + s1;
+        }
+        if (s2.length() != 0) {
+            s2 = " " + s2 + " Thousand";
         }
         String s3 = threeDigits(num % 1000);
         num /= 1000;
         if (num == 0) {
-            return s3 + " Million " + s2 + " Thousand " + s1;
+            return s3 + " Million" + s2 + s1;
         }
-        String s4 = threeDigits(num % 1000);
-        return s4 + " Billion " + s3 + " Million " + s2 + " Thousand " + s1;
+        if (s3.length() != 0) {
+            s3 = " " + s3 + " Million";
+        }
+        String s4 = threeDigits(num);
+        return s4 + " Billion" + s3 + s2 + s1;
     }
 }
