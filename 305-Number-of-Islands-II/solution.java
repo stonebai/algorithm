@@ -74,7 +74,7 @@ public class Solution {
     
     private int union(int[] uf, int root, int p) {
         if (p != -1) {
-            rootP = root(uf, p);
+            int rootP = root(uf, p);
             uf[rootP] = root;
             return 1;
         } else {
