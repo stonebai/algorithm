@@ -42,25 +42,25 @@ public class Solution {
         }
         int count = 0;
         if (up != -1) {
-            rootUp = root(uf, up);
+            int rootUp = root(uf, up);
             count -= union(uf, rootUp, left);
             count -= union(uf, rootUp, right);
             count -= union(uf, rootUp, down);
             union(uf, rootUp, i);
         } else {
             if (left != -1) {
-                rootLeft = root(uf, left);
+                int rootLeft = root(uf, left);
                 count -= union(uf, rootLeft, right);
                 count -= union(uf, rootLeft, down);
                 union(uf, rootLeft, i);
             } else {
                 if (right != -1) {
-                    rootRight = root(uf, right);
+                    int rootRight = root(uf, right);
                     count -= union(uf, rootRight, down);
                     union(uf, rootRight, i);
                 } else {
                     if (down != -1) {
-                        rootDown = root(uf, down);
+                        int rootDown = root(uf, down);
                         union(uf, rootDown, i);
                     } else {
                         uf[i] = i;
