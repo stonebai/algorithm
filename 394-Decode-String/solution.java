@@ -1,7 +1,7 @@
 public class Solution {
     public String decodeString(String s) {
         Stack<StringBuilder> stack = new Stack<StringBuilder>();
-        Stack<Integer> s = new Stack<Integer>();
+        Stack<Integer> nums = new Stack<Integer>();
         StringBuilder sb = new StringBuilder();
         char[] chs = s.toCharArray();
         int num = 0;
@@ -10,11 +10,11 @@ public class Solution {
                 num = num * 10 - '0' + chs[i];
             } else if (chs[i] == '[') {
                 stack.push(sb);
-                s.push(num);
+                nums.push(num);
                 sb = new StringBuilder();
                 num = 0;
             } else if (chs[i] == ']') {
-                int num = s.pop();
+                int num = nums.pop();
                 String str = repeat(sb.toString(), num);
                 sb = stack.pop();
                 sb.append(str);
