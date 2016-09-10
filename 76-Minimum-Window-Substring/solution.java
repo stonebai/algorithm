@@ -10,24 +10,18 @@ public class Solution {
             char ch = s.charAt(j);
             if (map.containsKey(ch)) {
                 int num = map.get(ch);
+                map.put(ch, num - 1);
                 if (num > 0) {
-                    map.put(ch, num - 1);
                     count++;
-                } else {
-                    char c = s.charAt(i++);
-                    while (c != ch) {
-                        if (map.containsKey(c)) {
-                            map.put(c, map.get(c) + 1);
-                            count--;
-                            c = s.charAt(i++);
-                        }
-                    }
                 }
             }
             j++;
             if (count == len) {
                 char c = s.charAt(i);
-                while (!map.containsKey(c)) {
+                while (!map.containsKey(c) || map.get(c) < 0) {
+                    if (map.containsKey(c)) {
+                        map.put(c, map.get(c) + 1);
+                    }
                     c = s.charAt(++i);
                 }
                 int tmp = j - i;
