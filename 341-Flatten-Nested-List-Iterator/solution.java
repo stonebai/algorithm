@@ -32,12 +32,13 @@ public class NestedIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        Integer res = this.current;
-        if (res != null) {
+        if (hasNext()) {
+            Integer res = this.current;
             this.current = null;
             return res;
+        } else {
+            return null;
         }
-        return null;
     }
 
     @Override
@@ -46,7 +47,7 @@ public class NestedIterator implements Iterator<Integer> {
             return true;
         } else {
             while (true) {
-                if (this.list != null || this.pos < this.list.size()) {
+                if (this.list != null && this.pos < this.list.size()) {
                     NestedInteger tmp = this.list.get(this.pos);
                     this.pos++;
                     if (tmp.isInteger()) {
