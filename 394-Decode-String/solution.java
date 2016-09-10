@@ -14,7 +14,7 @@ public class Solution {
                 sb = new StringBuilder();
                 num = 0;
             } else if (chs[i] == ']') {
-                int num = nums.pop();
+                num = nums.pop();
                 String str = repeat(sb.toString(), num);
                 sb = stack.pop();
                 sb.append(str);
