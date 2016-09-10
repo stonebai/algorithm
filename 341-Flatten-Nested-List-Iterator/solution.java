@@ -17,7 +17,7 @@
  */
 public class NestedIterator implements Iterator<Integer> {
     
-    private Stack<NestedInteger> stack;
+    private Stack<List<NestedInteger>> stack;
     private Stack<Integer> index;
     private List<NestedInteger> list;
     private int pos;
@@ -25,7 +25,7 @@ public class NestedIterator implements Iterator<Integer> {
     
     public NestedIterator(List<NestedInteger> nestedList) {
         this.list = nestedList;
-        this.stack = new Stack<NestedInteger>();
+        this.stack = new Stack<List<NestedInteger>>();
         this.index = new Stack<Integer>();
         this.pos = 0;
     }
