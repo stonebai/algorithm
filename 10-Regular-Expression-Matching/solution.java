@@ -27,7 +27,7 @@ public class Solution {
             return false;
         }
         if (j != chp.length) {
-            if (j = chp.length - 2 && chp[j + 1] == '*') {
+            if (j == chp.length - 2 && chp[j + 1] == '*') {
                 return true;
             } else {
                 return false;
