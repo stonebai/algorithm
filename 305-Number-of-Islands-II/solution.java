@@ -76,7 +76,7 @@ public class Solution {
         if (p != -1) {
             int rootP = root(uf, p);
             if (rootP != root) {
-                uf[rootP] == root;
+                uf[rootP] = root;
                 return 1;
             }
         }
