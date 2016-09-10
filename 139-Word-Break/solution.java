@@ -3,13 +3,13 @@ public class Solution {
         Queue<String> q = new LinkedList<String>();
         q.offer(s);
         while (!q.isEmpty()) {
-            String s = q.poll();
-            if (wordDict.contains(s)) {
+            String str = q.poll();
+            if (wordDict.contains(str)) {
                 return true;
             }
-            for (int i = 1;i < s.length();i++) {
-                if (wordDict.contains(s.substring(0, i))) {
-                    q.offer(s.substring(i));
+            for (int i = 1;i < str.length();i++) {
+                if (wordDict.contains(str.substring(0, i))) {
+                    q.offer(str.substring(i));
                 }
             }
         }
