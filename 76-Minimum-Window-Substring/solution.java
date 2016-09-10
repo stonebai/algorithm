@@ -1,45 +1,55 @@
 public class Solution {
     public String minWindow(String s, String t) {
-        if(t==null || s==null || t.length()==0 || s.length()==0) return "";
-        char[] tchs = t.toCharArray();
-        char[] schs = s.toCharArray();
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Character, Integer> map = preprocess(t);
+        int len = t.length();
         int count = 0;
-        for(char c : tchs) {
-            count++;
-            if(map.containsKey(c)) {
-                map.put(c, map.get(c) + 1);
-            }
-            else {
-                map.put(c, 1);
-            }
-        }
-        int start = 0;
-        int end = 0;
-        String res = null;
-        for(;end<schs.length;end++) {
-            if(map.containsKey(schs[end])) {
-                if(map.get(schs[end])>0) {
-                    count--;
-                }
-                map.put(schs[end], map.get(schs[end])-1);
-            }
-            if(count==0) {
-                while(!map.containsKey(schs[start]) || map.get(schs[start])<0) {
-                    if(map.containsKey(schs[start])) {
-                        map.put(schs[start], map.get(schs[start])+1);
+        int i = 0, j = 0;
+        int min = Integer.MAX_VALUE;
+        String res = "";
+        while (j < s.length()) {
+            char ch = s.charAt(j);
+            if (map.containsKey(ch)) {
+                int num = map.get(ch);
+                if (num > 0) {
+                    map.put(ch, num - 1);
+                    count++;
+                } else {
+                    char c = s.charAt(i++);
+                    while (c != ch) {
+                        if (map.containsKey(c)) {
+                            map.put(c, map.get(c) + 1);
+                            count--;
+                            c = s.charAt(i++);
+                        }
                     }
-                    start++;
                 }
-                int len = end - start + 1;
-                if(res==null || len<res.length()) {
-                    res = s.substring(start, end+1);
+            }
+            j++;
+            if (count == len) {
+                char c = s.charAt(i);
+                while (!map.containsKey(c)) {
+                    c = s.charAt(++i);
                 }
-                map.put(schs[start], map.get(schs[start])+1);
-                count++;
-                start++;
+                int tmp = j - i;
+                if (tmp < min) {
+                    res = s.substring(i, j);
+                    min = tmp;
+                }
             }
         }
-        return res==null?"":res;
+        return res;
+    }
+    
+    private Map<Character, Integer> preprocess(String t) {
+        Map<Character, Integer> res = new HashMap<Character, Integer>();
+        for (int i = 0;i < t.length();i++) {
+            char ch = t.charAt(i);
+            if (res.containsKey(ch)) {
+                res.put(ch, res.get(ch) + 1);
+            } else {
+                res.put(ch, 1);
+            }
+        }
+        return res;
     }
 }
