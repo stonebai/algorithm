@@ -19,14 +19,19 @@ public class Solution {
             if (chp[j] == '.' || chs[i] == chp[j]) {
                 i++;
                 j++;
+            } else {
+                return false;
             }
         }
         if (i != chs.length) {
             return false;
         }
         if (j != chp.length) {
-            if (j == chp.length - 2 && chp[j + 1] == '*') {
-                return true;
+            if (j <= chp.length - 2 && chp[j + 1] == '*') {
+                while (j <= chp.length - 2 && chp[j + 1] == '*') {
+                    j += 2;
+                }
+                return j == chp.length;
             } else {
                 return false;
             }
