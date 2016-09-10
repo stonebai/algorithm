@@ -20,10 +20,10 @@ public class Solution {
             }
             cur = cur.next;
         }
-        while (l1 != null) {
+        if (l1 != null) {
             cur.next = l1;
         }
-        while (l2 != null) {
+        if (l2 != null) {
             cur.next = l2;
         }
         return dummy.next;
