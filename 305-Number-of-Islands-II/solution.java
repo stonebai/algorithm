@@ -46,22 +46,22 @@ public class Solution {
             count -= union(uf, rootUp, left);
             count -= union(uf, rootUp, right);
             count -= union(uf, rootUp, down);
-            union(uf, rootUp, i);
+            uf[i] = rootUp;
         } else {
             if (left != -1) {
                 int rootLeft = root(uf, left);
                 count -= union(uf, rootLeft, right);
                 count -= union(uf, rootLeft, down);
-                union(uf, rootLeft, i);
+                uf[i] = rootLeft;
             } else {
                 if (right != -1) {
                     int rootRight = root(uf, right);
                     count -= union(uf, rootRight, down);
-                    union(uf, rootRight, i);
+                    uf[i] = rootRight;
                 } else {
                     if (down != -1) {
                         int rootDown = root(uf, down);
-                        union(uf, rootDown, i);
+                        uf[i] = rootDown;
                     } else {
                         uf[i] = i;
                         count++;
@@ -75,11 +75,12 @@ public class Solution {
     private int union(int[] uf, int root, int p) {
         if (p != -1) {
             int rootP = root(uf, p);
-            uf[rootP] = root;
-            return 1;
-        } else {
-            return 0;
+            if (rootP != root) {
+                uf[rootP] == root;
+                return 1;
+            }
         }
+        return 0;
     }
     
     private int root(int[] uf, int i) {
