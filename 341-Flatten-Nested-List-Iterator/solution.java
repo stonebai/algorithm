@@ -27,11 +27,11 @@ public class NestedIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        Integer res = current;
-        if (res != null) {
-            current = null;
+        if (hasNext()) {
+            return current;
+        } else {
+            return null;
         }
-        return res;
     }
 
     @Override
