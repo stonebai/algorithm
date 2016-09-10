@@ -1,24 +1,18 @@
 public class Solution {
-    
-    Map<String, Boolean> visited = new HashMap<String, Boolean>();
-    
     public boolean wordBreak(String s, Set<String> wordDict) {
-        if (s.equals("") || wordDict.contains(s)) {
-            return true;
-        }
-        if (visited.containsKey(s)) {
-            return visited.get(s);
-        }
-        
-        for (int i = 1;i < s.length();i++) {
-            String str = s.substring(0, i);
-            if (wordDict.contains(str) && wordBreak(s.substring(i), wordDict)) {
-                visited.put(s, true);
+        Queue<String> q = new LinkedList<String>();
+        q.offer(s);
+        while (!q.isEmpty()) {
+            String s = q.poll();
+            if (wordDict.contains(s)) {
                 return true;
             }
+            for (int i = 1;i < s.length();i++) {
+                if (wordDict.contains(s.substring(0, i))) {
+                    q.offer(s.substring(i));
+                }
+            }
         }
-        
-        visited.put(s, false);
         return false;
     }
 }
