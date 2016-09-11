@@ -1,73 +1,24 @@
 public class Solution {
     public List<String> removeInvalidParentheses(String s) {
-        char[] chs = s.toCharArray();
-        List<String> res = new ArrayList<String>();
-        int count = count(chs);
-        if (count == 0) {
-            res.add(s);
-            return res;
-        }
-        char target = '(';
-        if (count < 0) {
-            target = ')';
-            count = -count;
-        }
-        List<Integer> list = findIndex(chs, target);
-        List<List<Integer>> lists = new ArrayList<List<Integer>>();
-        combination(list, count, 0, new ArrayList<Integer>(), lists);
-        for (List<Integer> l : lists) {
-            int pre = 0;
-            StringBuilder sb = new StringBuilder();
-            for (int x : l) {
-                sb.append(s.substring(pre, x));
-                pre = x + 1;
-            }
-            if (pre < s.length()) {
-                sb.append(s.substring(pre));
-            }
-            res.add(sb.toString());
-        }
-        return res;
+        List<String> ans = new ArrayList<>();
+        remove(s, ans, 0, 0, new char[]{'(', ')'});
+        return ans;
     }
     
-    private void combination(List<Integer> list, int k, int pos, List<Integer> path, List<List<Integer>> res) {
-        if (path.size() == k) {
-            res.add(new ArrayList<Integer>(path));
+    private void remove(String s, List<String> ans, int last_i, int last_j,  char[] par) {
+        for (int stack = 0, i = last_i; i < s.length(); ++i) {
+            if (s.charAt(i) == par[0]) stack++;
+            if (s.charAt(i) == par[1]) stack--;
+            if (stack >= 0) continue;
+            for (int j = last_j; j <= i; ++j)
+                if (s.charAt(j) == par[1] && (j == last_j || s.charAt(j - 1) != par[1]))
+                    remove(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i, j, par);
             return;
         }
-        int left = k - path.size();
-        for (int i = pos;i < list.size() - left + 1;i++) {
-            path.add(list.get(i));
-            combination(list, k, pos + 1, path, res);
-            path.remove(path.size() - 1);
-        }
-    }
-    
-    private List<Integer> findIndex(char[] chs, char target) {
-        List<Integer> res = new ArrayList<Integer>();
-        for (int i = 0;i < chs.length;i++) {
-            if (chs[i] == target) {
-                while (i < chs.length && chs[i] == target) {
-                    i++;
-                }
-                if (chs[i - 1] == target) {
-                    res.add(i - 1);
-                }
-            }
-        }
-        return res;
-    }
-    
-    private int count(char[] chs) {
-        int count = 0;
-        for (int i = 0;i < chs.length;i++) {
-            if (chs[i] == '(') {
-                count++;
-            }
-            if (chs[i] == ')') {
-                count--;
-            }
-        }
-        return count;
+        String reversed = new StringBuilder(s).reverse().toString();
+        if (par[0] == '(') // finished left to right
+            remove(reversed, ans, 0, 0, new char[]{')', '('});
+        else // finished right to left
+            ans.add(reversed);
     }
 }
