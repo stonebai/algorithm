@@ -24,7 +24,7 @@ public class Solution {
                 UndirectedGraphNode n1 = q1.poll();
                 UndirectedGraphNode n2 = q2.poll();
                 for (UndirectedGraphNode t1 : n1.neighbors) {
-                    if (visited.contains(t1.label)) {
+                    if (visited.containsKey(t1.label)) {
                         n2.neighbors.add(visited.get(t1.label));
                         continue;
                     }
