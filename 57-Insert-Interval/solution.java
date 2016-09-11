@@ -9,7 +9,14 @@
  */
 public class Solution {
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        if (intervals.isEmpty()) {
+            intervals.add(newInterval);
+            return intervals;
+        }
         int index = bs(intervals, newInterval);
+        if (index == intervals.size() - 1 && intervals.get(index).start < newInterval.start) {
+            index++;
+        }
         // merge forward
         if (index > 0) {
             Interval tmp = intervals.get(index - 1);
