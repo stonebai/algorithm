@@ -47,10 +47,12 @@ public class Solution {
         List<Integer> res = new ArrayList<Integer>();
         for (int i = 0;i < chs.length;i++) {
             if (chs[i] == target) {
-                while (chs[i] == target) {
+                while (i < chs.length && chs[i] == target) {
                     i++;
                 }
-                res.add(i - 1);
+                if (chs[i - 1] == target) {
+                    res.add(i - 1);
+                }
             }
         }
         return res;
