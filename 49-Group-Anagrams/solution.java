@@ -17,8 +17,8 @@ public class Solution {
         }
         
         @Override
-        public boolean equals(Node o) {
-            return Arrays.equals(this.count, o.count);
+        public boolean equals(Object o) {
+            return Arrays.equals(this.count, ((Node) o).count);
         }
     }
     
