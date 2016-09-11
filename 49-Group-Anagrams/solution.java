@@ -1,9 +1,32 @@
 public class Solution {
+    
+    static class Node {
+        
+        int[] count;
+        
+        Node(String s) {
+            this.count = new int[26];
+            for (char ch : s.toCharArray()) {
+                this.count[ch - 'a']++;
+            }
+        }
+        
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(this.count);
+        }
+        
+        @Override
+        public boolean equals(Node o) {
+            return Arrays.equals(this.count, o.count);
+        }
+    }
+    
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> res = new ArrayList<List<String>>();
-        Map<String, List<String>> map = new HashMap<String, List<String>>();
+        Map<Node, List<String>> map = new HashMap<Node, List<String>>();
         for (String str : strs) {
-            String key = sort(str);
+            Node key = new Node(str);
             if (map.containsKey(key)) {
                 map.get(key).add(str);
             } else {
@@ -16,11 +39,5 @@ public class Solution {
             res.add(list);
         }
         return res;
-    }
-    
-    private String sort(String s) {
-        char[] chs = s.toCharArray();
-        Arrays.sort(chs);
-        return new String(chs);
     }
 }
