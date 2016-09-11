@@ -22,7 +22,7 @@ public class Solution {
             if (pre.right != null) {
                 q.offer(pre.right);
             }
-            for (int i = 0;i < size();i++) {
+            for (int i = 0;i < size;i++) {
                 TreeLinkNode cur = q.poll();
                 pre.next = cur;
                 if (cur.left != null) {
