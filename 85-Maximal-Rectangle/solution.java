@@ -4,7 +4,7 @@ public class Solution {
             return 0;
         }
         int row = matrix.length;
-        int col = matrix.length;
+        int col = matrix[0].length;
         int res = 0;
         if (row < col) {
             int[] dp = new int[row];
@@ -43,11 +43,11 @@ public class Solution {
                 h.push(dp[i]);
                 index.push(i);
             } else {
-                int pre = index.peek();
+                int pre = 0;
                 while (!h.isEmpty() && h.peek() >= dp[i]) {
                     int hi = h.pop();
                     int in = index.pop();
-                    int area = dp[i] * (i - in + 1);
+                    int area = hi * (i - in);
                     max = Math.max(area, max);
                     pre = in;
                 }
