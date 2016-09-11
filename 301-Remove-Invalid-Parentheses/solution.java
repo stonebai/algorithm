@@ -22,8 +22,8 @@ public class Solution {
                 sb.append(s.substring(pre, x));
                 pre = x + 1;
             }
-            if (x < s.length()) {
-                sb.append(s.substring(x));
+            if (pre < s.length()) {
+                sb.append(s.substring(pre));
             }
             res.add(sb.toString());
         }
