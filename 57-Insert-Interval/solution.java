@@ -9,30 +9,43 @@
  */
 public class Solution {
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-        Collections.sort(intervals, new Comparator<Interval>() {
-            @Override
-            public int compare(Interval a, Interval b) {
-                if(a.start!=b.start) {
-                    return a.start - b.start;
-                }
-                else {
-                    return a.end - b.end;
-                }
+        int index = bs(intervals, newInterval);
+        // merge forward
+        if (index > 0) {
+            Interval tmp = intervals.get(index - 1);
+            if (tmp.end >= newInterval.start) {
+                intervals.remove(--index);
+                newInterval.start = tmp.start;
+                newInterval.end = Math.max(newInterval.end, tmp.end);
             }
-        });
-        for(int i=0;i<intervals.size();i++) {
-            Interval tmp = intervals.get(i);
-            if(tmp.end<newInterval.start) continue;
-            if(tmp.start>newInterval.end) {
-                intervals.add(i, newInterval);
-                return intervals;
-            }
-            intervals.remove(i);
-            i--;
-            newInterval.start = Math.min(newInterval.start, tmp.start);
-            newInterval.end = Math.max(newInterval.end, tmp.end);
         }
-        intervals.add(newInterval);
+        // merge backward
+        while (index < intervals.size()) {
+            Interval tmp = intervals.get(index);
+            if (tmp.start <= newInterval.end) {
+                intervals.remove(index);
+                newInterval.end = Math.max(newInterval.end, tmp.end);
+            } else {
+                break;
+            }
+        }
+        intervals.add(index, newInterval);
         return intervals;
+    }
+    
+    private int bs(List<Interval> intervals, Interval newInterval) {
+        int start = 0, end = intervals.size() - 1;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            Interval tmp = intervals.get(mid);
+            if (tmp.start < newInterval.start) {
+                start = mid + 1;
+            } else if (tmp.start > newInterval.start) {
+                end = mid;
+            } else {
+                return mid;
+            }
+        }
+        return end;
     }
 }
