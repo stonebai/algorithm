@@ -12,7 +12,7 @@ public class Solution {
             if (stack >= 0) continue;
             for (int j = last_j; j <= i; ++j)
                 if (s.charAt(j) == par[1] && (j == last_j || s.charAt(j - 1) != par[1]))
-                    remove(s.substring(0, j) + s.substring(j + 1, s.length()), ans, i, j, par);
+                    remove(s.substring(0, j) + s.substring(j + 1), ans, i, j, par);
             return;
         }
         String reversed = new StringBuilder(s).reverse().toString();
