@@ -16,7 +16,7 @@ public class Solution {
         List<List<Integer>> lists = new ArrayList<List<Integer>>();
         combination(list, count, 0, new ArrayList<Integer>(), lists);
         for (List<Integer> l : lists) {
-            int pre = 0
+            int pre = 0;
             StringBuilder sb = new StringBuilder();
             for (int x : l) {
                 sb.append(s.substring(pre, x));
