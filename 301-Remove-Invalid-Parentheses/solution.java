@@ -14,7 +14,7 @@ public class Solution {
         }
         List<Integer> list = findIndex(chs, target);
         List<List<Integer>> lists = new ArrayList<List<Integer>>();
-        combination(list, count, 0, new ArrayList<Integer> path, lists);
+        combination(list, count, 0, new ArrayList<Integer>(), lists);
         for (List<Integer> l : lists) {
             int pre = 0
             StringBuilder sb = new StringBuilder();
