@@ -18,6 +18,9 @@ public class Solution {
     }
     
     private boolean dfs(char[][] board, int i, int j, char[] chs, int pos, boolean[][] visited) {
+        if (pos == chs.length) {
+            return true;
+        }
         if (i < 0 || j < 0 || i >= board.length || j >= board[i].length || visited[i][j] || chs[pos] != board[i][j]) {
             return false;
         }
