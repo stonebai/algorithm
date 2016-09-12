@@ -20,7 +20,7 @@ public class Vector2D implements Iterator<Integer> {
     public boolean hasNext() {
         while (this.iIter == null || !this.iIter.hasNext()) {
             if (this.lIter.hasNext()) {
-                this.iIter = this.lIter.next();
+                this.iIter = this.lIter.next().iterator();
             } else {
                 return false;
             }
