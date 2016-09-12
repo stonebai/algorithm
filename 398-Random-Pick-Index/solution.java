@@ -4,6 +4,10 @@ public class Solution {
     private int[] nums;
     private Random rand;
 
+    // 4, 3, 3, 3, 2, 1
+    // 0, 1, 2, 3, 4, 5
+    // 5, 4, 1, 2, 3, 0
+
     public Solution(int[] nums) {
         this.rand = new Random();
         this.nums = nums;
@@ -18,7 +22,7 @@ public class Solution {
         int left = leftBinarySearch(this.nums, this.indexes, target);
         int right = rightBinarySearch(this.nums, this.indexes, target);
         int offset = this.rand.nextInt(right - left + 1);
-        return left + offset;
+        return this.indexes[left + offset];
     }
     
     private int rightBinarySearch(int[] nums, int[] indexes, int target) {
@@ -52,7 +56,7 @@ public class Solution {
     private int[] sort(int[] nums, int[] indexes, int start, int end) {
         int[] res = new int[end - start + 1];
         if (start == end) {
-            res[start] = indexes[start];
+            res[0] = indexes[start];
             return res;
         }
         int mid = start + (end - start) / 2;
