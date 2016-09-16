@@ -31,24 +31,27 @@ public class Solution {
     // }
     
     public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
         int[] tmp = dfs(root);
-        return tmp[1] != -1;
+        return tmp[2] != -1;
     }
     
     private int[] dfs(TreeNode root) {
-        int[] res = new int[2];
+        int[] res = new int[3];
         res[0] = root.val;
+        res[1] = root.val;
         if (root.left != null) {
             int[] tmp = dfs(root.left);
-            if (tmp[1] == -1 || tmp[0] >= root.val) {
-                res[1] = -1;
+            if (tmp[2] == -1 || tmp[0] >= root.val) {
+                res[2] = -1;
                 return res;
             }
+            res[1] = tmp[1];
         }
         if (root.right != null) {
             int[] tmp = dfs(root.right);
-            if (tmp[1] == -1 || tmp[0] <= root.val) {
-                res[1] = -1;
+            if (tmp[2] == -1 || tmp[1] <= root.val) {
+                res[2] = -1;
                 return res;
             }
             res[0] = tmp[0];
