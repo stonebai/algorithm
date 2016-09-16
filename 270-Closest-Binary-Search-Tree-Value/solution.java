@@ -11,8 +11,8 @@ public class Solution {
     public int closestValue(TreeNode root, double target) {
         if (target > root.val && root.right != null) {
             int tmp = closestValue(root.right, target);
-            int a = Math.abs(target - root.val);
-            int b = Math.abs(target - tmp);
+            double a = Math.abs(target - root.val);
+            double b = Math.abs(target - tmp);
             if (a <= b) {
                 return root.val;
             } else {
@@ -20,8 +20,8 @@ public class Solution {
             }
         } else if (target < root.val && root.left != null) {
             int tmp = closestValue(root.left, target);
-            int a = Math.abs(target - root.val);
-            int b = Math.abs(target - tmp);
+            double a = Math.abs(target - root.val);
+            double b = Math.abs(target - tmp);
             if (a <= b) {
                 return root.val;
             } else {
