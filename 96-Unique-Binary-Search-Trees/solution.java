@@ -1,20 +1,23 @@
 public class Solution {
     public int numTrees(int n) {
-        return count(1, n);
+        int[] dp = new int[n];
+        return count(n, dp);
     }
     
-    private int count(int start, int end) {
-        if (start == end) {
+    private int count(int n, int[] dp) {
+        if (n == 0 || n == 1) {
             return 1;
         }
+        if (dp[n] != 0) {
+            return dp[n];
+        }
         int res = 0;
-        res += count(start + 1, end);
-        res += count(start, end - 1);
-        for (int i = start + 1;i < end;i++) {
-            int left = count(start, i - 1);
-            int right = count(i + 1, end);
+        for (int i = 0;i <= n;i++) {
+            int left = count(i, dp);
+            int right = count(n - i - 1, dp);
             res += left * right;
         }
+        dp[n] = res;
         return res;
     }
 }
