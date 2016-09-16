@@ -2,7 +2,7 @@ public class Solution {
     public int longestValidParentheses(String s) {
         char[] cs = s.toCharArray();
         Stack<Integer> ids = new Stack<Integer>();
-        Stack<Character> chs = new Stack<Integer>();
+        Stack<Character> chs = new Stack<Character>();
         for (int i = 0;i < cs.length;i++) {
             if (cs[i] == '(') {
                 ids.push(i);
@@ -29,6 +29,7 @@ public class Solution {
             res = Math.max(len, res);
             end = start;
         }
+        res = Math.max(res, end);
         return res;
     }
 }
