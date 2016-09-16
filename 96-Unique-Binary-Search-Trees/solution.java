@@ -12,9 +12,9 @@ public class Solution {
             return dp[n];
         }
         int res = 0;
-        for (int i = 0;i <= n;i++) {
-            int left = count(i, dp);
-            int right = count(n - i - 1, dp);
+        for (int i = 1;i <= n;i++) {
+            int left = count(i - 1, dp);
+            int right = count(n - i, dp);
             res += left * right;
         }
         dp[n] = res;
