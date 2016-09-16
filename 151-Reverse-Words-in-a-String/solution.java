@@ -2,11 +2,14 @@ public class Solution {
     public String reverseWords(String s) {
         String[] split = s.split("\\s+");
         StringBuilder sb = new StringBuilder();
-        for (int i = split.length - 1;i >= 0;i++) {
+        for (int i = split.length - 1;i >= 0;i--) {
             if (split[i].equals("")) {
                 continue;
             }
             sb.append(split[i] + " ");
+        }
+        if (sb.length() == 0) {
+            return "";
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
