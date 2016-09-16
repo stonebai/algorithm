@@ -24,6 +24,7 @@ public class Solution {
         int end = cs.length;
         int res = 0;
         while (!ids.isEmpty()) {
+            char ch = chs.pop();
             int start = ids.pop();
             int len = end - start - 1;
             res = Math.max(len, res);
