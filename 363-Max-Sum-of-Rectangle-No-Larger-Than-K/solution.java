@@ -2,27 +2,14 @@ public class Solution {
     public int maxSumSubmatrix(int[][] matrix, int k) {
         int row = matrix.length, col = matrix[0].length;
         int res = Integer.MIN_VALUE;
-        if (row <= col) {
-            for (int left = 0;left < col;left++) {
-                int[] dp = new int[row];
-                for (int j = left;j < col;j++) {
-                    for (int i = 0;i < row;i++) {
-                        dp[i] = dp[i] + matrix[i][j];
-                    }
-                    int tmp = helper(dp, k);
-                    res = Math.max(res, tmp);
+        for (int left = 0;left < col;left++) {
+            int[] dp = new int[row];
+            for (int j = left;j < col;j++) {
+                for (int i = 0;i < row;i++) {
+                    dp[i] = dp[i] + matrix[i][j];
                 }
-            }
-        } else {
-            for (int top = 0;top < row;top++) {
-                int[] dp = new int[col];
-                for (int i = top;i < row;i++) {
-                    for (int j = 0;j < col;j++) {
-                        dp[j] = dp[j] + matrix[i][j];
-                    }
-                    int tmp = helper(dp, k);
-                    res = Math.max(res, tmp);
-                }
+                int tmp = helper(dp, k);
+                res = Math.max(res, tmp);
             }
         }
         return res;
