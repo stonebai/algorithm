@@ -47,7 +47,7 @@ public class Solution {
                 map.put(ch, 1);
             }
         }
-        Queue<Node> q = new PriorityQueue<Node>(100, new Comparactor<Node>() {
+        Queue<Node> q = new PriorityQueue<Node>(100, new Comparacter<Node>() {
             @Override
             public int compare(Node a, Node b) {
                 return b.count - a.count;
