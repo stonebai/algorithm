@@ -10,7 +10,14 @@ public class MedianFinder {
     
     // Adds a number into the data structure.
     public void addNum(int num) {
-        maxQ.offer(num);
+        if (minQ.isEmpty() || minQ.peek() <= num) {
+            minQ.offer(num);
+        } else {
+            maxQ.offer(num);
+        }
+        while (maxQ.size() < minQ.size()) {
+            maxQ.offer(minQ.poll());
+        }
         while (minQ.size() < maxQ.size()) {
             minQ.offer(maxQ.poll());
         }
@@ -21,7 +28,7 @@ public class MedianFinder {
         if (minQ.size() == maxQ.size()) {
             return (minQ.peek() + maxQ.peek()) / 2.0;
         } else {
-            return maxQ.peek();
+            return minQ.peek();
         }
     }
 };
