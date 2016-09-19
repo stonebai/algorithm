@@ -6,26 +6,28 @@ public class Solution {
         char[] chs = s.toCharArray();
         int i = 0, j = 0;
         int res = 0;
-        int[] count = new int[26];
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
         while (j < chs.length) {
-            int index = chs[j] - 'a';
-            if (count[index] == 0) {
+            if (!map.containsKey(chs[j])) {
                 if (k > 0) {
                     k--;
                 } else {
                     res = Math.max(res, j - i);
                     while (true) {
-                        int idx = chs[i++] - 'a';
-                        count[idx]--;
-                        if (count[idx] == 0) {
+                        int num = map.get(chs[i]) - 1;
+                        if (num == 0) {
+                            map.remove(chs[i++]);
                             break;
                         }
+                        map.put(chs[i++], num);
                     }
                 }
+                map.put(chs[j], 1);
+            } else {
+                map.put(chs[j], map.get(chs[j]) + 1);
             }
-            count[index]++;
             j++;
         }
-        return res;
+        return Math.max(res, j - i);
     }
 }
