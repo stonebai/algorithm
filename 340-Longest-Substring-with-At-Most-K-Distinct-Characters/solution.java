@@ -1,5 +1,8 @@
 public class Solution {
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
+        if (k == 0) {
+            return 0;
+        }
         char[] chs = s.toCharArray();
         int i = 0, j = 0;
         int res = 0;
