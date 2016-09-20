@@ -6,7 +6,7 @@ public class Solution {
         for (int i = 0;i < chs.length;i++) {
             if (map.containsKey(chs[i])) {
                 int index = map.get(chs[i]);
-                if (index == sb.size() - 1) {
+                if (index == sb.length() - 1) {
                     continue;
                 }
                 char ch = sb.charAt(index + 1);
@@ -20,11 +20,11 @@ public class Solution {
                             entry.setValue(value - 1);
                         }
                     }
-                    map.put(chs[i], sb.size() - 1);
+                    map.put(chs[i], sb.length() - 1);
                 }
             } else {
                 sb.append(chs[i]);
-                map.put(chs[i], sb.size() - 1);
+                map.put(chs[i], sb.length() - 1);
             }
         }
         return sb.toString();
