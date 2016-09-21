@@ -18,7 +18,7 @@ public class Solution {
     }
     
     private void dfs(char[][] image, int x, int y, boolean[][] visited) {
-        if (x < 0 || y < 0 || x >= image.length || y >= image[x].length || image[i][j] != '1' || visited[x][y]) {
+        if (x < 0 || y < 0 || x >= image.length || y >= image[x].length || image[x][y] != '1' || visited[x][y]) {
             return;
         }
         visited[x][y] = true;
