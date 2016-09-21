@@ -21,11 +21,11 @@ public class ZigzagIterator {
         int res = iter.next();
         if (iter.hasNext()) {
             this.pos++;
-            if (this.pos == this.iters.size()) {
-                this.pos = 0;
-            }
         } else {
             this.iters.remove(this.pos);
+        }
+        if (this.pos == this.iters.size()) {
+            this.pos = 0;
         }
         return res;
     }
