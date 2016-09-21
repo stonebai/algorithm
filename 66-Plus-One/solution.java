@@ -4,7 +4,7 @@ public class Solution {
             return new int[0];
         }
         int i = digits.length - 1;
-        while (i < digits.length) {
+        while (i >= 0) {
             digits[i]++;
             if (digits[i] == 10) {
                 digits[i--] = 0;
