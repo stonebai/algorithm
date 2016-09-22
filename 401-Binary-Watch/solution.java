@@ -47,7 +47,7 @@ public class Solution {
         }
         List<Integer> res = new ArrayList<Integer>();
         for (int i = pos;i < num.length;i++) {
-            List<Integer> list = calculate(num, i + 1, n - 1);
+            List<Integer> list = calculate(num, i + 1, n - 1, upper);
             for (int v : list) {
                 int val = v + nums[i];
                 if (val < upper) {
