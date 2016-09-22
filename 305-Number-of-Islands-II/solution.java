@@ -1,4 +1,7 @@
 public class Solution {
+    
+    private static int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
         int[] uf = initialize(m, n);
         List<Integer> res = new ArrayList<Integer>();
@@ -11,76 +14,28 @@ public class Solution {
     }
     
     private int add(int[] uf, int x, int y, int m, int n) {
-        int i = x * n + y;
-        int up = -1;
-        if (i >= n) {
-            up = i - n;
-            if (uf[up] == -1) {
-                up = -1;
-            }
-        }
-        int left = -1;
-        if (i % n != 0) {
-            left = i - 1;
-            if (uf[left] == -1) {
-                left = -1;
-            }
-        }
-        int right = -1;
-        if (i % n != n - 1) {
-            right = i + 1;
-            if (uf[right] == -1) {
-                right = -1;
-            }
-        }
-        int down = -1;
-        if (i < (m - 1) * n) {
-            down = i + n;
-            if (uf[down] == -1) {
-                down = -1;
-            }
-        }
-        int count = 0;
-        if (up != -1) {
-            int rootUp = root(uf, up);
-            count -= union(uf, rootUp, left);
-            count -= union(uf, rootUp, right);
-            count -= union(uf, rootUp, down);
-            uf[i] = rootUp;
+        int res = 1;
+        int t = x * n + y;
+        if (uf[t] != -1) {
+            return 0;
         } else {
-            if (left != -1) {
-                int rootLeft = root(uf, left);
-                count -= union(uf, rootLeft, right);
-                count -= union(uf, rootLeft, down);
-                uf[i] = rootLeft;
-            } else {
-                if (right != -1) {
-                    int rootRight = root(uf, right);
-                    count -= union(uf, rootRight, down);
-                    uf[i] = rootRight;
-                } else {
-                    if (down != -1) {
-                        int rootDown = root(uf, down);
-                        uf[i] = rootDown;
-                    } else {
-                        uf[i] = i;
-                        count++;
+            uf[t] = t;
+        }
+        for (int[] dir : dirs) {
+            int a = x + dir[0];
+            int b = y + dir[0];
+            if (a >= 0 && b >= 0 && a < m && b < n) {
+                int i = a * n + b;
+                if (uf[i] != -1) {
+                    r = root(uf, i);
+                    if (r != t) {
+                        uf[r] = t;
+                        res--;
                     }
                 }
             }
         }
-        return count;
-    }
-    
-    private int union(int[] uf, int root, int p) {
-        if (p != -1) {
-            int rootP = root(uf, p);
-            if (rootP != root) {
-                uf[rootP] = root;
-                return 1;
-            }
-        }
-        return 0;
+        return res;
     }
     
     private int root(int[] uf, int i) {
@@ -89,12 +44,6 @@ public class Solution {
             i = uf[i];
         }
         return i;
-    }
-    
-    private boolean isConnected(int[] uf, int i, int j) {
-        int rootI = root(uf, i);
-        int rootJ = root(uf, j);
-        return rootI == rootJ;
     }
     
     private int[] initialize(int m, int n) {
