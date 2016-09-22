@@ -5,27 +5,34 @@ public class Solution {
         }
         int res = 0;
         char[] chs = s.toCharArray();
-        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        Character[] cs = new Character[2];
+        int[] ps = new int[2];
         int i = 0, j = 0;
         while (j < chs.length) {
-            if (map.containsKey(chs[j])) {
-                map.put(chs[j], map.get(chs[j]) + 1);
-            } else {
-                if (map.size() == 2) {
-                    res = Math.max(res, j - i);
-                    while (true) {
-                        int count = map.get(chs[i]) - 1;
-                        if (count == 0) {
-                            map.remove(chs[i++]);
-                            break;
-                        } else {
-                            map.put(chs[i++], count);
-                        }
+            boolean found = false;
+            for (int k = 0;k < 2;k++) {
+                if (cs[k] == null || cs[k] == chs[j]) {
+                    found = true;
+                    ps[k] = j;
+                    cs[k] = chs[j++];
+                    break;
+                }
+            }
+            if (!found) {
+                res = Math.max(res, j - i);
+                System.out.println(i + " " + j);
+                int min = Integer.MAX_VALUE;
+                int minIndex = Integer.MAX_VALUE;
+                for (int k = 0;k < 2;k++) {
+                    if (ps[k] < min) {
+                        min = ps[k];
+                        minIndex = k;
                     }
                 }
-                map.put(chs[j], 1);
+                i = min + 1;
+                ps[minIndex] = j;
+                cs[minIndex] = chs[j++];
             }
-            j++;
         }
         return Math.max(res, j - i);
     }
