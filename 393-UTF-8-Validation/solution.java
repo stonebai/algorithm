@@ -3,37 +3,42 @@ public class Solution {
         if (data == null || data.length == 0) {
             return false;
         }
-        int len = count(data[0]);
-        if (len != data.length) {
-            return false;
-        }
-        for (int i = 1;i < data.length;i++) {
-            if (!startsWith(data[i])) {
-                return false;
+        int i = 0;
+        while (i < data.length) {
+            if (data[i] < 128) {
+                i++;
+            } else {
+                if (data[i] >= 192 && data[i] <= 223) {
+                    if (data.length <= i + 1) {
+                        return false;
+                    }
+                    if (data[i + 1] < 128 || data[i + 1] >= 192) {
+                        return false;
+                    }
+                    i += 2;
+                } else if (data[i] >= 224 && data[i] <= 239) {
+                    if (data.length <= i + 2) {
+                        return false;
+                    }
+                    if (data[i + 1] < 128 || data[i + 1] >= 192 || data[i + 2] < 128 || data[i + 2] >= 192) {
+                        return false;
+                    }
+                    i += 3;
+                } else if (data[i] >= 240 && data[i] <= 247) {
+                    if (data.length <= i + 3) {
+                        return false;
+                    }
+                    if (data[i + 1] < 128 || data[i + 1] >= 192 ||
+                        data[i + 2] < 128 || data[i + 2] >= 192 ||
+                        data[i + 3] < 128 || data[i + 3] >= 192) {
+                            return false;
+                        }
+                    i += 4;
+                } else {
+                    return false;
+                }
             }
         }
         return true;
-    }
-    
-    private boolean startsWith(int num) {
-        int x = 1 << 7;
-        int y = 1 << 6;
-        return (num & x) != 0 && (num & y) == 0;
-    }
-    
-    private int count(int num) {
-        int x = 1 << 7;
-        int res = 1;
-        while (true) {
-            if (x & num != 0) {
-                x = x >> 1;
-                res++;
-            } else {
-                return res;
-            }
-            if (res > 4) {
-                return -1;
-            }
-        }
     }
 }
