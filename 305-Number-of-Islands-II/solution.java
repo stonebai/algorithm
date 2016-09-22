@@ -14,20 +14,20 @@ public class Solution {
     }
     
     private int add(int[] uf, int x, int y, int m, int n) {
-        int res = 1;
         int t = x * n + y;
         if (uf[t] != -1) {
             return 0;
         } else {
             uf[t] = t;
         }
+        int res = 1;
         for (int[] dir : dirs) {
             int a = x + dir[0];
-            int b = y + dir[0];
+            int b = y + dir[1];
             if (a >= 0 && b >= 0 && a < m && b < n) {
                 int i = a * n + b;
                 if (uf[i] != -1) {
-                    r = root(uf, i);
+                    int r = root(uf, i);
                     if (r != t) {
                         uf[r] = t;
                         res--;
