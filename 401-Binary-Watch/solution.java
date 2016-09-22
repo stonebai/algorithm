@@ -24,7 +24,11 @@ public class Solution {
         }
         List<Integer> list = calculate(minutes, 0, num, 60);
         for (int val : list) {
-            res.add(String.valueOf(val));
+            if (val > 9) {
+                res.add(String.valueOf(val));
+            } else {
+                res.add("0" + val);
+            }
         }
         return res;
     }
@@ -42,14 +46,18 @@ public class Solution {
     }
     
     private List<Integer> calculate(int[] num, int pos, int n, int upper) {
-        if (num.length - pos < n) {
-            return new ArrayList<Integer>();
-        }
         List<Integer> res = new ArrayList<Integer>();
+        if (n == 0) {
+            res.add(0);
+            return res;
+        }
+        if (num.length - pos < n) {
+            return res;
+        }
         for (int i = pos;i < num.length;i++) {
             List<Integer> list = calculate(num, i + 1, n - 1, upper);
             for (int v : list) {
-                int val = v + nums[i];
+                int val = v + num[i];
                 if (val < upper) {
                     res.add(val);
                 }
