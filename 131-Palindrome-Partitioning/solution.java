@@ -4,7 +4,7 @@ public class Solution {
         if (s == null || s.length() == 0) {
             return res;
         }
-        if (isPalindrom(s)) {
+        if (isPalindrome(s)) {
             List<String> list = new ArrayList<String>();
             list.add(s);
             res.add(list);
