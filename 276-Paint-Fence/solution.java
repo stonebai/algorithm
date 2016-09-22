@@ -15,13 +15,13 @@ public class Solution {
             if (dp[n][0] != 0) {
                 return dp[n][0];
             }
-            dp[n][0] = (k - 1) * helper(n - 1, k, false);
+            dp[n][0] = (k - 1) * helper(n - 1, k, false, dp);
             return dp[n][0];
         } else {
             if (dp[n][1] != 0) {
                 return dp[n][1];
             }
-            dp[n][1] = (k - 1) * helper(n - 1, k, false) + helper(n - 1, k, true);
+            dp[n][1] = (k - 1) * helper(n - 1, k, false, dp) + helper(n - 1, k, true, dp);
             return dp[n][1];
         }
     }
